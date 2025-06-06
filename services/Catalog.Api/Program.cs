@@ -7,7 +7,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer(); // برای پشتیبانی از endpoint ها
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new() { Title = "Catalog.Api", Version = "v1",Description = "Catalog API"});
+    c.SwaggerDoc("v1", new() { Title = "Catalog.Api", Version = "v1", Description = "Catalog API" });
 });
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -19,8 +19,8 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    app.UseSwagger();                         // فعال‌سازی Swagger
-    app.UseSwaggerUI();                       // فعال‌سازی رابط گرافیکی Swagger UI
+    app.UseSwagger(); // فعال‌سازی Swagger
+    app.UseSwaggerUI(); // فعال‌سازی رابط گرافیکی Swagger UI
 }
 
 app.UseAuthorization();
