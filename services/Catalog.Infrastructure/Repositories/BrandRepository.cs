@@ -1,13 +1,14 @@
 ﻿using Catalog.Core.Entities;
 using Catalog.Core.Repositories;
 using Catalog.Infrastructure.Data;
+using MongoDB.Driver;
 
 namespace Catalog.Infrastructure.Repositories;
 
 public class BrandRepository(ICatalogContext context) : IBrandRepository
 {
-    public Task<IEnumerable<ProductBrand>> GetProductBrands()
+    public async Task<IEnumerable<ProductBrand>> GetProductBrands()
     {
-        throw new NotImplementedException();
+        return await context.Brands.Find(x => true).ToListAsync();
     }
 }
