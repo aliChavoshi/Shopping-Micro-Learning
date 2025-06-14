@@ -3,7 +3,7 @@ using Catalog.Application.Responses;
 using Catalog.Core.Repositories;
 using MediatR;
 
-namespace Catalog.Application.Queries;
+namespace Catalog.Application.Queries.Brands;
 
 public class GetAllProductBrandsQuery : IRequest<IEnumerable<BrandResponse>>
 {
