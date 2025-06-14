@@ -14,4 +14,5 @@ public interface IProductRepository
     Task<bool> UpdateProduct(Product product);
     Task<bool> DeleteProduct(string id);
     Task<bool> DeleteProduct(Product product);
+    Task<Product> CreateProduct(Product product);
 }

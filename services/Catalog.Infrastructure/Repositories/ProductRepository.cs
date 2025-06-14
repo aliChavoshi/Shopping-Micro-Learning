@@ -59,4 +59,10 @@ public class ProductRepository(ICatalogContext context) : IProductRepository
     {
         return await DeleteProduct(product.Id);
     }
+
+    public async Task<Product> CreateProduct(Product product)
+    {
+        await context.Products.InsertOneAsync(product);
+        return product;
+    }
 }
