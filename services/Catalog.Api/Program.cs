@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Asp.Versioning;
 using Catalog.Core.Repositories;
 using Catalog.Infrastructure.Data;
 using Catalog.Infrastructure.Repositories;
@@ -10,6 +11,14 @@ builder.Services.AddControllers();
 
 //Register Automapper
 builder.Services.AddAutoMapper(typeof(Program));
+//Register Versioning
+builder.Services.AddApiVersioning(options =>
+{
+    options.DefaultApiVersion = new ApiVersion(1, 0);
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.ReportApiVersions = true;
+});
+
 //Mediator
 builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 // builder.Services.AddTransient<IRequestHandler<DeleteProductCommand, bool>, DeleteProductCommandHandler>();
