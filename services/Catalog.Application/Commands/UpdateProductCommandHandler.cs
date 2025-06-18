@@ -2,7 +2,7 @@
 
 public class UpdateProductCommand
 {
-
+    //
 }
 public class UpdateProductCommandHandler
 {
