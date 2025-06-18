@@ -2,7 +2,8 @@
 
 namespace Catalog.Api.Controllers;
 
-public class ApiController : Controller
-{
-    
-}
+[ApiVersion("1.0")]
+[Route("api/v{version:apiVersion}/[controller]")]
+//api/v1/catalog/getAllProducts
+[ApiController]
+public class ApiController : ControllerBase;
