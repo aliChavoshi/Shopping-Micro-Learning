@@ -24,7 +24,7 @@ public class CreateProductCommandHandler(IProductRepository productRepository, I
     {
         var entity = mapper.Map<Product>(request);
         var result = await productRepository.CreateProduct(entity);
-        //TODO
+        //TODO exception handler
         return mapper.Map<ProductResponse>(result);
     }
 }

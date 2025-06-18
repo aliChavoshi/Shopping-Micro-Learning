@@ -1,8 +1,23 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using System.Reflection;
+using Catalog.Core.Repositories;
+using Catalog.Infrastructure.Data;
+using Catalog.Infrastructure.Repositories;
+
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
+
+//Register Automapper
+builder.Services.AddAutoMapper(typeof(Program));
+//Mediator
+builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+// builder.Services.AddTransient<IRequestHandler<DeleteProductCommand, bool>, DeleteProductCommandHandler>();
+//DI
+builder.Services.AddScoped<ICatalogContext, CatalogContext>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ITypeRepository, TypeRepository>();
+builder.Services.AddScoped<IBrandRepository, BrandRepository>();
 // Add Swagger services
 builder.Services.AddEndpointsApiExplorer(); // برای پشتیبانی از endpoint ها
 builder.Services.AddSwaggerGen(c =>
