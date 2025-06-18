@@ -4,7 +4,7 @@ using Catalog.Core.Entities;
 using Catalog.Core.Repositories;
 using MediatR;
 
-namespace Catalog.Application.Commands;
+namespace Catalog.Application.Commands.Products;
 
 public class CreateProductCommand : IRequest<ProductResponse>
 {
