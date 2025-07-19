@@ -1,0 +1,14 @@
+services:
+  #CatalogDB
+  catalogdb:
+    image : mongo
+
+  #Catalog.API
+  catalog.api:
+    image: ${DOCKER_REGISTRY-}catalogapi
+    build:
+      context: .
+      dockerfile: services/Catalog.Api/Dockerfile
+
+volumes:
+ mongo_data:
