@@ -1,15 +1,17 @@
-﻿using System.Net.Http.Headers;
+﻿using Catalog.Core.CatalogSpecs;
 using Catalog.Core.Entities;
 using Catalog.Core.Repositories;
 using Catalog.Infrastructure.Data;
 using MongoDB.Driver;
+using System.Net.Http.Headers;
 
 namespace Catalog.Infrastructure.Repositories;
 
 public class ProductRepository(ICatalogContext context) : IProductRepository
 {
-    public async Task<IEnumerable<Product>> GetProducts()
+    public async Task<IEnumerable<Product>> GetProducts(CatalogSpecParams specParams)
     {
+        //mongo => filters
         return await context.Products.Find(x => true).ToListAsync();
     }
 

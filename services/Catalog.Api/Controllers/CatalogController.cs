@@ -3,6 +3,7 @@ using Catalog.Application.Queries.Brands;
 using Catalog.Application.Queries.Products;
 using Catalog.Application.Queries.Types;
 using Catalog.Application.Responses;
+using Catalog.Core.CatalogSpecs;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
