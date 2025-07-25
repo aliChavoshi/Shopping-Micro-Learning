@@ -1,8 +1,10 @@
-﻿using System.Reflection;
-using Asp.Versioning;
+﻿using Asp.Versioning;
+using Catalog.Application.Mapper;
+using Catalog.Application.Queries.Brands;
 using Catalog.Core.Repositories;
 using Catalog.Infrastructure.Data;
 using Catalog.Infrastructure.Repositories;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 //Register Automapper
-builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddAutoMapper(typeof(ProfileMapper));
 //Register Versioning
 builder.Services.AddApiVersioning(options =>
 {
@@ -19,8 +21,13 @@ builder.Services.AddApiVersioning(options =>
     options.ReportApiVersions = true;
 });
 
-//Mediator
-builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+//Register Mediator
+var assemblies = new Assembly[]
+{
+    Assembly.GetExecutingAssembly(),
+    typeof(GetAllProductBrandsQueryHandler).Assembly
+};
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies));
 // builder.Services.AddTransient<IRequestHandler<DeleteProductCommand, bool>, DeleteProductCommandHandler>();
 //DI
 builder.Services.AddScoped<ICatalogContext, CatalogContext>();
