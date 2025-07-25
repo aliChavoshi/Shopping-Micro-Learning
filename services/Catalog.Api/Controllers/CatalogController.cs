@@ -51,7 +51,8 @@ public class CatalogController(IMediator mediator) : ApiController
     public async Task<ActionResult<IEnumerable<ProductResponse>>> GetProductsByBrandName(string brand,
         CancellationToken cancellationToken)
     {
-        return Ok(await mediator.Send(new GetProductsByBrandQuery(brand), cancellationToken));
+        var result = await mediator.Send(new GetProductsByBrandQuery(brand), cancellationToken);
+        return Ok(result);
     }
 
     [HttpGet("{type}")]
