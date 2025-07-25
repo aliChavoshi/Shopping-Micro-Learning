@@ -5,7 +5,7 @@ namespace Catalog.Core.Repositories;
 
 public interface IProductRepository
 {
-    Task<IEnumerable<Product>> GetProducts(CatalogSpecParams specParams);
+    Task<Pagination<Product>> GetProducts(CatalogSpecParams specParams);
     Task<Product> GetProductById(string id);
     Task<IEnumerable<Product>> GetProductsByName(string name);
     Task<IEnumerable<Product>> GetProductsByType(string type);

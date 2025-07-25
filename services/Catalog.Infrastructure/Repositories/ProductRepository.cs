@@ -9,10 +9,44 @@ namespace Catalog.Infrastructure.Repositories;
 
 public class ProductRepository(ICatalogContext context) : IProductRepository
 {
-    public async Task<IEnumerable<Product>> GetProducts(CatalogSpecParams specParams)
+    public async Task<Pagination<Product>> GetProducts(CatalogSpecParams specParams)
     {
         //mongo => filters
-        return await context.Products.Find(x => true).ToListAsync();
+        var builder = Builders<Product>.Filter; //create filter
+        var filters = builder.Empty; //empty
+
+        filters = BuildeFilterDefinition(specParams, filters, builder);
+
+        var totalItems = await context.Products.CountDocumentsAsync(filters);
+        var data = await context.Products
+            .Find(filters)
+            .Skip(specParams.PageSize * (specParams.PageIndex - 1))
+            .Limit(specParams.PageSize)
+            .ToListAsync();
+        return new Pagination<Product>(specParams.PageIndex, specParams.PageSize, (int)totalItems, data);
+    }
+
+    private static FilterDefinition<Product> BuildeFilterDefinition(CatalogSpecParams specParams, FilterDefinition<Product> filters,
+        FilterDefinitionBuilder<Product> builder)
+    {
+        if (!string.IsNullOrEmpty(specParams.Search))
+        {
+            filters &= builder.Where(x => x.Name.ToLower().Contains(specParams.Search));
+        }
+
+        if (!string.IsNullOrEmpty(specParams.BrandId))
+        {
+            var brandFilter = builder.Eq(x => x.Brands.Id, specParams.BrandId);
+            filters &= brandFilter;
+        }
+
+        if (!string.IsNullOrEmpty(specParams.TypeId))
+        {
+            var typeFilter = builder.Eq(x => x.Types.Id, specParams.TypeId);
+            filters &= typeFilter;
+        }
+
+        return filters;
     }
 
     public async Task<Product> GetProductById(string id)
