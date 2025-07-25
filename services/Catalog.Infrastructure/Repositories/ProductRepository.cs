@@ -11,27 +11,61 @@ public class ProductRepository(ICatalogContext context) : IProductRepository
 {
     public async Task<Pagination<Product>> GetProducts(CatalogSpecParams specParams)
     {
-        //mongo => filters
         var builder = Builders<Product>.Filter; //create filter
         var filters = builder.Empty; //empty
-
-        filters = BuildeFilterDefinition(specParams, filters, builder);
-
-        var totalItems = await context.Products.CountDocumentsAsync(filters);
-        var data = await context.Products
-            .Find(filters)
-            .Skip(specParams.PageSize * (specParams.PageIndex - 1))
-            .Limit(specParams.PageSize)
-            .ToListAsync();
+        //filters
+        filters = BuilderFilterDefinition(specParams, filters, builder);
+        //get total Items
+        var totalItems = await GetTotalItems(filters);
+        //Sort Data
+        var sort = SortDefinition(specParams);
+        var data = await GetData(specParams, filters, sort);
+        //Sort
         return new Pagination<Product>(specParams.PageIndex, specParams.PageSize, (int)totalItems, data);
     }
 
-    private static FilterDefinition<Product> BuildeFilterDefinition(CatalogSpecParams specParams, FilterDefinition<Product> filters,
+    private async Task<List<Product>> GetData(CatalogSpecParams specParams, FilterDefinition<Product> filters,
+        SortDefinition<Product> sort)
+    {
+        var data = await context.Products
+            .Find(filters)
+            .Sort(sort)
+            .Skip(specParams.PageSize * (specParams.PageIndex - 1))
+            .Limit(specParams.PageSize)
+            .ToListAsync();
+        return data;
+    }
+
+    private static SortDefinition<Product> SortDefinition(CatalogSpecParams specParams)
+    {
+        var sort = Builders<Product>.Sort.Ascending(x => x.Name); //default
+        if (!string.IsNullOrEmpty(specParams.Sort))
+        {
+            sort = specParams.Sort switch
+            {
+                "priceAsc" => Builders<Product>.Sort.Ascending(x => x.Price),
+                "priceDesc" => Builders<Product>.Sort.Descending(x => x.Price),
+                _ => Builders<Product>.Sort.Ascending(x => x.Name)
+            };
+        }
+
+        return sort;
+    }
+
+    private async Task<long> GetTotalItems(FilterDefinition<Product> filters)
+    {
+        var totalItems = await context.Products.CountDocumentsAsync(filters);
+        return totalItems;
+    }
+
+    private static FilterDefinition<Product> BuilderFilterDefinition(CatalogSpecParams specParams,
+        FilterDefinition<Product> filters,
         FilterDefinitionBuilder<Product> builder)
     {
         if (!string.IsNullOrEmpty(specParams.Search))
         {
-            filters &= builder.Where(x => x.Name.ToLower().Contains(specParams.Search));
+            var searchFilter = builder.Where(x => x.Name.ToLower().Contains(specParams.Search.ToLower()));
+            filters &= searchFilter;
         }
 
         if (!string.IsNullOrEmpty(specParams.BrandId))
