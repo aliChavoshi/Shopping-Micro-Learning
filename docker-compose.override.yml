@@ -26,3 +26,21 @@ services:
       # 8080 : docker file
       # 9000 local machine
       - "9000:8080"
+  
+  #BasketDB 6379:6379
+  basketdb:
+    container_name: basketdb
+    restart: always
+    ports:
+      - "6379:6379"
+
+  #Basket.API
+  basket.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionString__Redis=basketdb:6379"
+      - ASPNETCORE_HTTP_PORTS=8080
+    ports:
+      - "9001:8080"
+    depends_on:
+      - basketdb
