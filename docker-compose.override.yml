@@ -38,7 +38,7 @@ services:
   basket.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - "ConnectionString__Redis=basketdb:6379"
+      - "ConnectionStrings__Redis=basketdb:6379"
       - ASPNETCORE_HTTP_PORTS=8080
     ports:
       - "9001:8080"

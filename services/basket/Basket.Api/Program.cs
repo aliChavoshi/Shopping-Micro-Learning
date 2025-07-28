@@ -36,7 +36,6 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new() { Title = "Catalog.Api", Version = "v1", Description = "Catalog API" });
 });
 
-builder.Services.AddOpenApi();
 //Redis Configuration
 builder.Services.AddStackExchangeRedisCache(options =>
 {
@@ -48,6 +47,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.MapOpenApi();
     app.UseSwagger(); // فعال‌سازی Swagger
     app.UseSwaggerUI(); // فعال‌سازی رابط گرافیکی Swagger UI
