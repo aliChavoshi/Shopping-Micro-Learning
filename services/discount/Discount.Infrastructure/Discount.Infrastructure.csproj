@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.66" />
+    <!--GRPC-->
+    <PackageReference Include="Grpc.AspNetCore" Version="2.71.0" />
+    <!--Postgress-->
+    <PackageReference Include="Npgsql" Version="9.0.3" />
+	</ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Discount.Application\Discount.Application.csproj" />
   </ItemGroup>
 
