@@ -33,7 +33,7 @@ builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 builder.Services.AddEndpointsApiExplorer(); // برای پشتیبانی از endpoint ها
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new() { Title = "Catalog.Api", Version = "v1", Description = "Catalog API" });
+    c.SwaggerDoc("v1", new() { Title = "Basket.Api", Version = "v1", Description = "Basket API" });
 });
 
 //Redis Configuration

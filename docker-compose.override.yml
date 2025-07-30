@@ -34,7 +34,7 @@ services:
     ports:
       - "6379:6379"
 
-  #Basket.API
+  #Basket.API 9001:8080
   basket.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
