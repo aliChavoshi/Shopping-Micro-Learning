@@ -7,7 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Discount.Core\Discount.Core.csproj" />
+    <Protobuf Include="Protos\discount.proto" GrpcServices="Server" />
   </ItemGroup>
+
+	<ItemGroup>
+		<!--GRPC-->
+		<PackageReference Include="Grpc.AspNetCore" Version="2.71.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Discount.Core\Discount.Core.csproj" />
+	</ItemGroup>
 
 </Project>
