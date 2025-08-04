@@ -21,8 +21,4 @@
 		<ProjectReference Include="..\Discount.Core\Discount.Core.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Commands\" />
-	</ItemGroup>
-
 </Project>
