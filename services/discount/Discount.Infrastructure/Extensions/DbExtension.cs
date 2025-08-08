@@ -17,7 +17,7 @@ public static class DbExtension
         try
         {
             logger.LogInformation("Start Migration on {DbContextName}", typeof(TContext).Name);
-            ApplyMigrateOnDb<TContext>(configuration);
+            ApplyMigrateOnDb<TContext>(configuration, logger);
             logger.LogInformation("Database was migrated");
         }
         catch (Exception e)
@@ -29,7 +29,7 @@ public static class DbExtension
         return host;
     }
 
-    private static void ApplyMigrateOnDb<TContext>(IConfiguration configuration)
+    private static void ApplyMigrateOnDb<TContext>(IConfiguration configuration, ILogger logger)
     {
         var retry = 5;
         while (retry > 0)
@@ -42,7 +42,7 @@ public static class DbExtension
                 using var cmd = new NpgsqlCommand();
                 cmd.Connection = connection;
                 //Drop Table
-                cmd.CommandText = "DROP TABLE IF EXIST Coupon";
+                cmd.CommandText = "DROP TABLE IF EXISTS Coupon";
                 cmd.ExecuteNonQuery();
                 //Create Table
                 cmd.CommandText = @"CREATE TABLE Coupon(Id SERIAL PRIMARY KEY, 
@@ -68,6 +68,8 @@ public static class DbExtension
                 {
                     throw;
                 }
+
+                logger.LogWarning(e, "Retrying database migration, attempts left: {Retry}", retry);
 
                 Thread.Sleep(2000);
             }
