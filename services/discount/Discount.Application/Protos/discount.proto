@@ -1,12 +1,13 @@
 ﻿syntax = "proto3";
 option csharp_namespace = "Discount.Application.Protos";
 
-service DiscountService {
+service DiscountProtoService {
   rpc CreateDiscount(CreateDiscountRequest) returns (CouponModel);
-  rpc GetDiscount(GetDiscountRequest) returns (CouponModel);
+  rpc GetDiscountByName(GetDiscountRequest) returns (CouponModel);
   rpc GetDiscountById(GetDiscountByIdRequest) returns (CouponModel);
   rpc UpdateDiscount(UpdateDiscountRequest) returns (CouponModel);
-  rpc DeleteDiscount(DeleteDiscountRequest) returns (DeleteDiscountResponse);
+  rpc DeleteDiscountById(DeleteDiscountRequest) returns (DeleteDiscountResponse);
+  rpc DeleteDiscountByName(DeleteDiscountRequestByName) returns (DeleteDiscountResponse);
 }
 
 // Requests
@@ -27,7 +28,11 @@ message UpdateDiscountRequest {
 }
 
 message DeleteDiscountRequest {
-  int32 id = 1; 
+  string productId = 1; 
+}
+
+message DeleteDiscountRequestByName {
+  string productName = 1;
 }
 
 // Responses
