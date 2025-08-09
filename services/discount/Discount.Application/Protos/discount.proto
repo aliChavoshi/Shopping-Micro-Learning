@@ -9,7 +9,7 @@ service DiscountProtoService {
   rpc DeleteDiscountById(DeleteDiscountRequest) returns (DeleteDiscountResponse);
   rpc DeleteDiscountByName(DeleteDiscountRequestByName) returns (DeleteDiscountResponse);
 }
-
+//STUB
 // Requests
 message CreateDiscountRequest {
   CouponModel coupon = 1;

@@ -17,7 +17,6 @@ public class DiscountService(IMediator mediator) : DiscountProtoService.Discount
             Success = result
         };
     }
-
     public override async Task<DeleteDiscountResponse> DeleteDiscountByName(DeleteDiscountRequestByName request, ServerCallContext context)
     {
         var command = new DeleteDiscountByNameCommand(request.ProductName);
@@ -27,13 +26,11 @@ public class DiscountService(IMediator mediator) : DiscountProtoService.Discount
             Success = result
         };
     }
-
     public override async Task<CouponModel> CreateDiscount(CreateDiscountRequest request, ServerCallContext context)
     {
         var command = new CreateDiscountCommand(request.Coupon);
         return await mediator.Send(command);
     }
-    
     public override async Task<CouponModel> GetDiscountByName(GetDiscountRequest request, ServerCallContext context)
     {
         var query = new GetDiscountByNameQuery(request.ProductName);
