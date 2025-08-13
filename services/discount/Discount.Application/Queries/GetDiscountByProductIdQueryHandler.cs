@@ -22,7 +22,8 @@ public class GetDiscountByProductIdQueryHandler(IDiscountRepository discountRepo
     public async Task<CouponModel> Handle(GetDiscountByProductIdQuery request, CancellationToken cancellationToken)
     {
         var entity = await discountRepository.GetDiscount(request.ProductId);
-        throw new RpcException(new Status(StatusCode.NotFound, $"Discount not found for {request.ProductId}"));
+        if (entity == null)
+            throw new RpcException(new Status(StatusCode.NotFound, $"Discount not found for {request.ProductId}"));
         return mapper.Map<CouponModel>(entity);
     }
 }

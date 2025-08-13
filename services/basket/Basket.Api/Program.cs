@@ -1,16 +1,23 @@
 ﻿using Asp.Versioning;
 using Basket.Application.Mapper;
 using System.Reflection;
+using Basket.Application.GrpcService;
 using Basket.Application.Queries.GetBasket;
 using Basket.Core.Repository;
 using Basket.Infrastructure.Services;
+using Discount.Application.Protos;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
-
+//GRPC
+builder.Services.AddScoped<DiscountGrpcService>();
+builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(options =>
+{
+    options.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]!);
+});
 //Register Automapper
 builder.Services.AddAutoMapper(typeof(ProfileMapper));
 //Register Versioning
