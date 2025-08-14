@@ -6,6 +6,7 @@ namespace Ordering.Application.Mapping;
 
 public class OrderMapper : IRegister
 {
+    //IMapper
     public void Register(TypeAdapterConfig config)
     {
         config.NewConfig<OrderResponse, Order>();
