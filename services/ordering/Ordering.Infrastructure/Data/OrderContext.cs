@@ -8,6 +8,7 @@ public class OrderContext(DbContextOptions<OrderContext> options) : DbContext(op
 {
     public DbSet<Order> Orders => Set<Order>();
 
+    //Instead of this use interceptors
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
     {
         foreach (var entry in ChangeTracker.Entries<BaseEntity>())
@@ -25,6 +26,14 @@ public class OrderContext(DbContextOptions<OrderContext> options) : DbContext(op
                     entry.Entity.CreatedBy = "Ali Chavoshi"; //TODO
                     entry.Entity.DateCreated = DateTime.Now;
                     break;
+                case EntityState.Detached:
+                    break;
+                case EntityState.Unchanged:
+                    break;
+                case EntityState.Deleted:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
 

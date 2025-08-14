@@ -1,10 +1,11 @@
 ﻿using System.Linq.Expressions;
 using Ordering.Core.Common;
 using Ordering.Core.Repositories;
+using Ordering.Infrastructure.Data;
 
 namespace Ordering.Infrastructure.Services;
 
-public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
+public class GenericRepository<T>(OrderContext context) : IGenericRepository<T> where T : BaseEntity
 {
     public Task<IReadOnlyList<T>> GetAllAsync()
     {
