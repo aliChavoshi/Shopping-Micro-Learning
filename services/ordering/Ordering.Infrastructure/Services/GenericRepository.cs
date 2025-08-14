@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Ordering.Core.Common;
 using Ordering.Core.Repositories;
-using Ordering.Infrastructure.Data;
 
 namespace Ordering.Infrastructure.Services;
 
