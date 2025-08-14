@@ -8,7 +8,7 @@ public class OrderContext(DbContextOptions<OrderContext> options) : DbContext(op
 {
     public DbSet<Order> Orders => Set<Order>();
 
-    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
     {
         foreach (var entry in ChangeTracker.Entries<BaseEntity>())
         {
