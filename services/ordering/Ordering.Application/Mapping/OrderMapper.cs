@@ -1,4 +1,5 @@
 ﻿using Mapster;
+using Ordering.Application.Features.Command.CheckoutOrder;
 using Ordering.Application.Responses;
 using Ordering.Core.Entities;
 
@@ -10,6 +11,7 @@ public class OrderMapper : IRegister
     public void Register(TypeAdapterConfig config)
     {
         config.NewConfig<OrderResponse, Order>();
+        config.NewConfig<CheckoutOrderCommand, Order>();
         config.NewConfig<Order, OrderResponse>();
     }
 }

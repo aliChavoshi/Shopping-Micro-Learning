@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Ordering.Core.Common;
 using Ordering.Core.Repositories;
+using Ordering.Infrastructure.Data;
 
 namespace Ordering.Infrastructure.Services;
 
@@ -24,9 +25,9 @@ public class GenericRepository<T>(OrderContext context) : IGenericRepository<T> 
 
     public async Task<T> AddAsync(T entity)
     {
-        context.Set<T>().Add(entity);
+        var result = await context.Set<T>().AddAsync(entity);
         await SaveChangeAsync();
-        return entity;
+        return result.Entity;
     }
 
     public async Task UpdateAsync(T entity)
