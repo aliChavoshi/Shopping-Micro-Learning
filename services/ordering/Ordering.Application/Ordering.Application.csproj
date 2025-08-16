@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Ordering.Core\Ordering.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Command\UpdateOrder\" />
+  </ItemGroup>
+
 </Project>
