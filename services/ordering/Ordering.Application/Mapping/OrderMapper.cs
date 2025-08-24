@@ -1,5 +1,6 @@
 ﻿using Mapster;
 using Ordering.Application.Features.Command.CheckoutOrder;
+using Ordering.Application.Features.Command.UpdateOrder;
 using Ordering.Application.Responses;
 using Ordering.Core.Entities;
 
@@ -13,5 +14,6 @@ public class OrderMapper : IRegister
         config.NewConfig<OrderResponse, Order>();
         config.NewConfig<CheckoutOrderCommand, Order>();
         config.NewConfig<Order, OrderResponse>();
+        config.NewConfig<UpdateOrderCommand, Order>();
     }
 }

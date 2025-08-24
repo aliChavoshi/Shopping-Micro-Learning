@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Command\UpdateOrder\" />
+    <Folder Include="Features\Validators\" />
   </ItemGroup>
 
 </Project>

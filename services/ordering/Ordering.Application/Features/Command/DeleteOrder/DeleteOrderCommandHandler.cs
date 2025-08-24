@@ -15,7 +15,7 @@ public class DeleteOrderCommandHandler(IOrderRepository orderRepository) : IRequ
     public async Task Handle(DeleteOrderCommand request, CancellationToken cancellationToken)
     {
         var order = await orderRepository.GetByIdAsync(request.Id);
-        if (order == null) throw new OrderNotFound(nameof(Order), request.Id);
+        if (order == null) throw new OrderNotFoundException(nameof(Order), request.Id);
         await orderRepository.DeleteAsync(order);
     }
 }
