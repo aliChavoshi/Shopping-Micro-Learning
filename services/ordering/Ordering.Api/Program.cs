@@ -1,6 +1,8 @@
 ﻿using Asp.Versioning;
+using Ordering.Api.Extensions;
 using Ordering.Application;
 using Ordering.Infrastructure;
+using Ordering.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
@@ -22,7 +24,12 @@ builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
 var app = builder.Build();
-
+//Migration on DB
+app.MigrationDatabase<OrderContext>((context, services) =>
+{
+    //var logger = services.GetService<ILogger<OrderSeedData>>();
+    OrderSeedData.SeedAsync(context).Wait();
+});
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
