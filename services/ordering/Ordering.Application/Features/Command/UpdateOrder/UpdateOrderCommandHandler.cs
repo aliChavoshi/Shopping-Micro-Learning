@@ -25,7 +25,7 @@ public class UpdateOrderCommandHandler(IOrderRepository orderRepository, IMapper
     public async Task Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
     {
         var entity = await orderRepository.GetByIdAsync(request.Id);
-        if (entity == null) throw new OrderNotFoundException(nameof(Order), request.Id);
+        if (entity == null) throw new GlobalNotFoundException(nameof(Order), request.Id);
         mapper.Map(request, entity);
         await orderRepository.UpdateAsync(entity);
     }

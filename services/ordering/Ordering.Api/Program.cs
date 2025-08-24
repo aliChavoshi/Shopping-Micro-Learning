@@ -1,6 +1,8 @@
 ﻿using Mapster;
 using MapsterMapper;
+using Ordering.Application;
 using Ordering.Application.Mapping;
+using Ordering.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,13 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-//Start Mapster
-var typeAdapterConfig = TypeAdapterConfig.GlobalSettings;
-typeAdapterConfig.Scan(typeof(OrderMapper).Assembly);
+builder.Services.AddApplicationServices();
+builder.Services.AddInfrastructureServices(builder.Configuration);
 
-builder.Services.AddSingleton(typeAdapterConfig);
-builder.Services.AddScoped<IMapper, ServiceMapper>();
-//End Mapster
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
