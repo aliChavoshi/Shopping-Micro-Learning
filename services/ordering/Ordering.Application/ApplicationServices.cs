@@ -43,6 +43,7 @@ public static class ApplicationServices
 
         //PipeLine
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationsBehavior<,>));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnHandledExceptionBehavior<,>));
 
         #endregion
 
