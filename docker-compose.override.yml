@@ -89,3 +89,31 @@ services:
     ports:
       - "9002:8080"
 
+  #OrderDB 1433:1433
+  orderdb:
+    container_name: orderdb
+    environment:
+      SA_PASSWORD: "Alich1234567"
+      ACCEPT_EULA: "Y"
+    restart: always
+    ports:
+      - "1433:1433"
+    volumes:
+      - orderdb_data:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'Alich1234567' -Q 'select 1'"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+
+  #ordering.api 9003:8080
+  ordering.api:
+    container_name: ordering.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://*:8080 
+      - "ConnectionStrings__OrderingConnectionString=Server=orderdb;Database=OrderDb;User Id=sa;Password=Alich1234567;TrustServerCertificate=True" 
+    depends_on:
+     - orderdb
+    ports:
+     - "9003:8080"      

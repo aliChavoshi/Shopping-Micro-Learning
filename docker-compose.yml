@@ -1,4 +1,8 @@
 services:
+  #OrderDb
+  orderdb:
+    image : mcr.microsoft.com/mssql/server:2022-latest  
+
   #CatalogDB
   catalogdb:
     image : mongo
@@ -36,7 +40,15 @@ services:
       context: .
       dockerfile: services/discount/Discount.Api/Dockerfile
 
+  #Order.API
+  ordering.api:
+    image: ${DOCKER_REGISTRY-}orderingapi
+    build:
+      context: .
+      dockerfile: services/ordering/Ordering.Api/Dockerfile
+
 volumes:
  mongo_data:
  postgres_data:  
  pgadmin_data:
+ orderdb_data:
