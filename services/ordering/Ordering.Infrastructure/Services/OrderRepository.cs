@@ -7,8 +7,10 @@ namespace Ordering.Infrastructure.Services;
 
 public class OrderRepository(OrderContext context) : GenericRepository<Order>(context), IOrderRepository
 {
+    private readonly OrderContext _context = context;
+
     public async Task<IEnumerable<Order>> GetOrdersByUserName(string userName)
     {
-        return await context.Orders.Where(x => x.UserName == userName).ToListAsync();
+        return await _context.Orders.Where(x => x.UserName == userName).ToListAsync();
     }
 }

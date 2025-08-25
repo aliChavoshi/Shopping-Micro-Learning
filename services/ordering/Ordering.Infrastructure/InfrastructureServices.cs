@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Ordering.Core.Repositories;
 using Ordering.Infrastructure.Data;
 using Ordering.Infrastructure.Services;
@@ -14,7 +15,11 @@ public static class InfrastructureServices
     {
         services.AddDbContext<OrderContext>(options =>
         {
-            options.UseSqlServer(configuration.GetConnectionString("OrderingConnectionString"));
+            options.UseSqlServer(configuration.GetConnectionString("OrderingConnectionString"), builder =>
+            {
+                builder.EnableRetryOnFailure(4);
+                builder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+            });
         });
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddScoped<IOrderRepository, OrderRepository>();

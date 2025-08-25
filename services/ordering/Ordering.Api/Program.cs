@@ -25,11 +25,12 @@ builder.Services.AddInfrastructureServices(builder.Configuration);
 
 var app = builder.Build();
 //Migration on DB
-app.MigrationDatabase<OrderContext>((context, services) =>
+await app.MigrationDatabase<OrderContext>(async (context, services) =>
 {
     //var logger = services.GetService<ILogger<OrderSeedData>>();
-    OrderSeedData.SeedAsync(context).Wait();
+    await OrderSeedData.SeedAsync(context); // ✅ به جای .Wait()
 });
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

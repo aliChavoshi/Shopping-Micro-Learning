@@ -23,7 +23,7 @@ public class OrderSeedData
         {
             new Order
             {
-                UserName = "ali.chavoshi",
+                UserName = "Ali Chavoshi",
                 TotalPrice = 125_000,
                 FirstName = "Ali",
                 LastName = "Chavoshi",
@@ -34,7 +34,7 @@ public class OrderSeedData
             },
             new Order
             {
-                UserName = "sara.m",
+                UserName = "Ali Chavoshi",
                 TotalPrice = 850_000,
                 FirstName = "Sara",
                 LastName = "Moradi",
@@ -45,7 +45,7 @@ public class OrderSeedData
             },
             new Order
             {
-                UserName = "mohammad.k",
+                UserName = "Ali Chavoshi",
                 TotalPrice = 500_000,
                 FirstName = "Mohammad",
                 LastName = "Karimi",
