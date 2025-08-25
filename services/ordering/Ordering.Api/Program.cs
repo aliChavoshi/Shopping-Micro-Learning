@@ -18,7 +18,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer(); // برای پشتیبانی از endpoint ها
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new() { Title = "Basket.Api", Version = "v1", Description = "Basket API" });
+    c.SwaggerDoc("v1", new() { Title = "Order.Api", Version = "v1", Description = "Order API" });
 });
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
