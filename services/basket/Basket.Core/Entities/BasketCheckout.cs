@@ -4,7 +4,9 @@ public class BasketCheckout
 {
     //Identity
     public Guid Guid { get; set; } = Guid.NewGuid();
+
     public string? UserName { get; set; }
+
     //Customer
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
