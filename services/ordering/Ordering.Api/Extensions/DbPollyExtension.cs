@@ -40,7 +40,7 @@ public static class DbPollyExtension
                         await context.Database.EnsureDeletedAsync();
                     }
                     await context.Database.MigrateAsync();
-                    await seeder(context, services);
+                    await seeder(context, services); //Run Seed Data
                 }
             });
 

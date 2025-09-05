@@ -6,14 +6,15 @@ namespace Ordering.Infrastructure.Data;
 
 public class OrderSeedData
 {
-    public static async Task SeedAsync(OrderContext context)
+    public static async Task SeedAsync(OrderContext context, ILogger<OrderSeedData>? logger)
     {
         if (!await context.Orders.AnyAsync())
         {
             var orders = GetOrders();
             context.Orders.AddRange(orders);
             await context.SaveChangesAsync();
-            // logger.LogInformation("Seed database associated with context {context}", nameof(context));
+            if (logger != null)
+                logger.LogInformation("Seed database associated with context {context}", nameof(context));
         }
     }
 

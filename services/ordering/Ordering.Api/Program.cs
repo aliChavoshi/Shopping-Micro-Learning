@@ -27,8 +27,8 @@ var app = builder.Build();
 //Migration on DB
 await app.MigrationDatabase<OrderContext>(async (context, services) =>
 {
-    //var logger = services.GetService<ILogger<OrderSeedData>>();
-    await OrderSeedData.SeedAsync(context); // ✅ به جای .Wait()
+    var logger = services.GetService<ILogger<OrderSeedData>>();
+    await OrderSeedData.SeedAsync(context,logger); // ✅ به جای .Wait()
 });
 
 // Configure the HTTP request pipeline.
