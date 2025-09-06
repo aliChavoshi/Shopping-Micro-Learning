@@ -36,15 +36,18 @@ services:
 
   #Basket.API 9001:8080
   basket.api:
+    container_name: basket.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "ConnectionStrings__Redis=basketdb:6379"
       - ASPNETCORE_URLS=http://*:8080
       - "GrpcSettings__DiscountUrl=http://discount.api:8080"
+      - "EventBusSettings__HostAddress=ampq://guest:quest@rabbitmq:5672"
     ports:
       - "9001:8080"
     depends_on:
       - basketdb
+      - rabbitmq
   
   #discountdb 5432:5432
   discountdb:
@@ -105,6 +108,14 @@ services:
       interval: 10s
       timeout: 10s
       retries: 3
+ 
+  #RabbitMQ 15672 5672
+  rabbitmq:
+    container_name: rabbitmq
+    restart: always
+    ports:
+    - "15672:15672"
+    - "5672:5672"
 
   #ordering.api 9003:8080
   ordering.api:
@@ -113,7 +124,9 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://*:8080 
       - "ConnectionStrings__OrderingConnectionString=Server=orderdb;Database=OrderDb;User Id=sa;Password=Alich1234567;TrustServerCertificate=True" 
+      - "EventBusSettings__HostAddress=ampq://guest:quest@rabbitmq:5672"
     depends_on:
      - orderdb
+     - rabbitmq
     ports:
      - "9003:8080"      

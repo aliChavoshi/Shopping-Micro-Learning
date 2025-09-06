@@ -15,6 +15,7 @@ COPY ["services/ordering/Ordering.Api/Ordering.Api.csproj", "services/ordering/O
 COPY ["services/ordering/Ordering.Infrastructure/Ordering.Infrastructure.csproj", "services/ordering/Ordering.Infrastructure/"]
 COPY ["services/ordering/Ordering.Application/Ordering.Application.csproj", "services/ordering/Ordering.Application/"]
 COPY ["services/ordering/Ordering.Core/Ordering.Core.csproj", "services/ordering/Ordering.Core/"]
+#Rabbit MQ
 COPY ["Infrastructure/EventBus.Messages/EventBus.Messages.csproj", "Infrastructure/EventBus.Messages/"]
 RUN dotnet restore "./services/ordering/Ordering.Api/Ordering.Api.csproj"
 COPY . .

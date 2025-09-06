@@ -46,6 +46,10 @@ services:
     build:
       context: .
       dockerfile: services/ordering/Ordering.Api/Dockerfile
+  
+  #RabbitMQ
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
 
 volumes:
  mongo_data:

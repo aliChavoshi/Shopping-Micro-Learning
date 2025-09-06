@@ -15,6 +15,7 @@ COPY ["services/basket/Basket.Api/Basket.Api.csproj", "services/basket/Basket.Ap
 COPY ["services/basket/Basket.Infrastructure/Basket.Infrastructure.csproj", "services/basket/Basket.Infrastructure/"]
 COPY ["services/basket/Basket.Application/Basket.Application.csproj", "services/basket/Basket.Application/"]
 COPY ["services/basket/Basket.Core/Basket.Core.csproj", "services/basket/Basket.Core/"]
+#Rabbit MQ
 COPY ["Infrastructure/EventBus.Messages/EventBus.Messages.csproj", "Infrastructure/EventBus.Messages/"]
 RUN dotnet restore "./services/basket/Basket.Api/Basket.Api.csproj"
 COPY . .
