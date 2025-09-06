@@ -6,6 +6,8 @@ public class ShoppingCartResponse
 {
     public Guid Guid { get; set; }
     public string? UserName { get; set; }
+    public decimal TotalPrice { get; set; }
+
     public List<ShoppingCartItem> Items { get; set; } = [];
 
     public ShoppingCartResponse()

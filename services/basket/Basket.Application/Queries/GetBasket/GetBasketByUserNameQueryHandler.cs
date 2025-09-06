@@ -17,8 +17,12 @@ public class GetBasketByUserNameQueryHandler(IBasketRepository basketRepository,
         CancellationToken cancellationToken)
     {
         var basket = await basketRepository.GetBasket(request.UserName);
-        return basket == null
-            ? new ShoppingCartResponse(request.UserName)
-            : mapper.Map<ShoppingCartResponse>(basket);
+        if (basket != null)
+        {
+            var response = mapper.Map<ShoppingCartResponse>(basket);
+            response.TotalPrice = response.CalculateOriginalPrice();
+            return response;
+        }
+        return new ShoppingCartResponse(request.UserName);
     }
 }

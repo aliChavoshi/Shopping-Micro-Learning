@@ -30,6 +30,8 @@ public class CreateBasketCommandHandler(
         //Create Basket
         var shoppingCart = mapper.Map<ShoppingCart>(request);
         await basketRepository.UpdateBasket(shoppingCart);
-        return mapper.Map<ShoppingCartResponse>(shoppingCart);
+        var response = mapper.Map<ShoppingCartResponse>(shoppingCart);
+        response.TotalPrice = response.CalculateOriginalPrice();
+        return response;
     }
 }

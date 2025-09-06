@@ -11,9 +11,9 @@
 
 	<ItemGroup>
 		<!-- RabbitMQ -->
-		<PackageReference Include="MassTransit" Version="8.5.2" />
+		<PackageReference Include="MassTransit" Version="7.3.1" />
 		<PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
-		<PackageReference Include="MassTransit.RabbitMQ" Version="8.5.2" />
+		<PackageReference Include="MassTransit.RabbitMQ" Version="7.3.1" />
 		<!--END RabbitMQ -->
 		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.7" />
 		<!-- Versioning -->
@@ -26,6 +26,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\Infrastructure\EventBus.Messages\EventBus.Messages.csproj" />
 		<ProjectReference Include="..\Basket.Infrastructure\Basket.Infrastructure.csproj" />
 	</ItemGroup>
 

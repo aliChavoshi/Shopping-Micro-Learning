@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
 		<TargetFramework>net9.0</TargetFramework>
@@ -12,9 +12,9 @@
 
 	<ItemGroup>
 		<!-- RabbitMQ -->
-		<PackageReference Include="MassTransit" Version="8.5.2" />
+		<PackageReference Include="MassTransit" Version="7.3.1" />
 		<PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
-		<PackageReference Include="MassTransit.RabbitMQ" Version="8.5.2" />
+		<PackageReference Include="MassTransit.RabbitMQ" Version="7.3.1" />
 		<!--END RabbitMQ -->
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.8">
 			<PrivateAssets>all</PrivateAssets>
