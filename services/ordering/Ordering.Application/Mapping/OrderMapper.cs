@@ -1,4 +1,5 @@
-﻿using Mapster;
+﻿using EventBus.Messages.Events;
+using Mapster;
 using Ordering.Application.Features.Command.CheckoutOrder;
 using Ordering.Application.Features.Command.UpdateOrder;
 using Ordering.Application.Responses;
@@ -15,5 +16,6 @@ public class OrderMapper : IRegister
         config.NewConfig<CheckoutOrderCommand, Order>();
         config.NewConfig<Order, OrderResponse>();
         config.NewConfig<UpdateOrderCommand, Order>();
+        config.NewConfig<BasketCheckoutEvent, CheckoutOrderCommand>(); //RabbitMQ
     }
 }
