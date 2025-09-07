@@ -42,7 +42,7 @@ services:
       - "ConnectionStrings__Redis=basketdb:6379"
       - ASPNETCORE_URLS=http://*:8080
       - "GrpcSettings__DiscountUrl=http://discount.api:8080"
-      - "EventBusSettings__HostAddress=amqp://guest:quest@rabbitmq:5672"
+      - "EventBusSettings__HostAddress=amqp://guest:guest@rabbitmq:5672"
     ports:
       - "9001:8080"
     depends_on:
@@ -124,7 +124,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://*:8080 
       - "ConnectionStrings__OrderingConnectionString=Server=orderdb;Database=OrderDb;User Id=sa;Password=Alich1234567;TrustServerCertificate=True" 
-      - "EventBusSettings__HostAddress=amqp://guest:quest@rabbitmq:5672"
+      - "EventBusSettings__HostAddress=amqp://guest:guest@rabbitmq:5672"
     depends_on:
      - orderdb
      - rabbitmq

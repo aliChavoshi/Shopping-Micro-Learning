@@ -1,4 +1,7 @@
 ﻿using Asp.Versioning;
+using EventBus.Messages.Common;
+using MassTransit;
+using Ordering.Api.EventBusConsumer;
 using Ordering.Api.Extensions;
 using Ordering.Application;
 using Ordering.Infrastructure;
@@ -14,6 +17,22 @@ builder.Services.AddApiVersioning(options =>
     options.ReportApiVersions = true;
 });
 builder.Services.AddOpenApi();
+//Rabbit MQ : Consumer
+builder.Services.AddScoped<BasketOrderingConsumer>();
+builder.Services.AddMassTransit(configuration =>
+{
+    configuration.AddConsumer<BasketOrderingConsumer>();
+    configuration.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host(builder.Configuration["EventBusSettings:HostAddress"]);
+        //provide Queue Name with Consumer Settings
+        cfg.ReceiveEndpoint(EventBusConstant.BasketCheckoutEvent, e =>
+        {
+            e.ConfigureConsumer<BasketOrderingConsumer>(context);
+        });
+    });
+});
+builder.Services.AddMassTransitHostedService();
 // Add Swagger services
 builder.Services.AddEndpointsApiExplorer(); // برای پشتیبانی از endpoint ها
 builder.Services.AddSwaggerGen(c =>

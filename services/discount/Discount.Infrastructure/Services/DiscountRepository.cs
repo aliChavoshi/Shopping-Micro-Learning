@@ -15,7 +15,14 @@ public class DiscountRepository(IConfiguration configuration) : IDiscountReposit
         await using var connection = new NpgsqlConnection(_connectionString);
         const string sql = "SELECT * FROM Coupon WHERE ProductId = @ProductId";
         var coupon = await connection.QueryFirstOrDefaultAsync<Coupon>(sql, new { ProductId = productId });
-        return coupon ?? new Coupon();
+        return coupon ?? new Coupon()
+        {
+            Amount = 0,
+            Description = "",
+            Id = 0,
+            ProductId = "",
+            ProductName = ""
+        };
     }
 
     public async Task<Coupon> GetDiscountByName(string productName)
@@ -23,7 +30,14 @@ public class DiscountRepository(IConfiguration configuration) : IDiscountReposit
         await using var connection = new NpgsqlConnection(_connectionString);
         const string sql = "SELECT * FROM Coupon WHERE ProductName = @ProductName";
         var coupon = await connection.QueryFirstOrDefaultAsync<Coupon>(sql, new { ProductName = productName });
-        return coupon ?? new Coupon();
+        return coupon ?? new Coupon()
+        {
+            Amount = 0,
+            Description = "",
+            Id = 0,
+            ProductId = "",
+            ProductName = ""
+        };
     }
 
     public async Task<bool> CreateDiscount(Coupon coupon)
