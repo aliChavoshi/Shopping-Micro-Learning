@@ -1,7 +1,9 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
 using Serilog.Exceptions;
+using Serilog.Sinks.Elasticsearch;
 
 namespace Common.Logging;
 
@@ -31,6 +33,20 @@ public class Logging
                 //.MinimumLevel.Override("Ocelot.ApiGateways", LogEventLevel.Debug)
                 //.MinimumLevel.Override("Ocelot", LogEventLevel.Debug)
                 .MinimumLevel.Override("Common", LogEventLevel.Debug);
+        }
+
+        //Elastic Search
+        var elasticUrl = context.Configuration.GetValue<string>("ElasticConfiguration:Uri");
+        if (!string.IsNullOrEmpty(elasticUrl))
+        {
+            loggerConfiguration.WriteTo.Elasticsearch(
+                new ElasticsearchSinkOptions(new Uri(elasticUrl))
+                {
+                    AutoRegisterTemplate = true,
+                    AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv8,
+                    IndexFormat = "ecommerce-Logs-{0:yyyy.MM.dd}",
+                    MinimumLogEventLevel = LogEventLevel.Debug
+                });
         }
     };
 }
