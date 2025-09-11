@@ -20,8 +20,10 @@ services:
       - "DatabaseSettings__CollectionName=Products"
       - "DatabaseSettings__BrandsCollection=Brands"
       - "DatabaseSettings__TypesCollection=Types"
+      - "ElasticConfiguration__Uri=http://elasticsearch:9200"
     depends_on:
       - catalogdb
+      - elasticsearch
     ports:
       # 8080 : docker file
       # 9000 local machine
@@ -43,11 +45,13 @@ services:
       - ASPNETCORE_URLS=http://*:8080
       - "GrpcSettings__DiscountUrl=http://discount.api:8080"
       - "EventBusSettings__HostAddress=amqp://guest:guest@rabbitmq:5672"
+      - "ElasticConfiguration__Uri=http://elasticsearch:9200"
     ports:
       - "9001:8080"
     depends_on:
       - basketdb
       - rabbitmq
+      - elasticsearch
   
   #discountdb 5432:5432
   discountdb:
@@ -86,9 +90,12 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://*:8080
       - "DatabaseSettings__ConnectionString=Server=discountdb;Port=5432;Database=DiscountDb;User Id=admin;Password=Password@1;"
+      - "ElasticConfiguration__Uri=http://elasticsearch:9200"
     depends_on:
+       elasticsearch:
+          condition: service_started
        discountdb:
-         condition: service_healthy
+          condition: service_healthy
     ports:
       - "9002:8080"
 
@@ -117,6 +124,28 @@ services:
     - "15672:15672"
     - "5672:5672"
 
+  #Elasticsearch 9200:9200
+  elasticsearch:
+    container_name: elasticsearch
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+  
+  #Kibana 5601:5601
+  kibana:
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
+    ports:
+      - "5601:5601"
+
   #ordering.api 9003:8080
   ordering.api:
     container_name: ordering.api
@@ -125,8 +154,10 @@ services:
       - ASPNETCORE_URLS=http://*:8080 
       - "ConnectionStrings__OrderingConnectionString=Server=orderdb;Database=OrderDb;User Id=sa;Password=Alich1234567;TrustServerCertificate=True" 
       - "EventBusSettings__HostAddress=amqp://guest:guest@rabbitmq:5672"
+      - "ElasticConfiguration__Uri=http://elasticsearch:9200"
     depends_on:
      - orderdb
      - rabbitmq
+     - elasticsearch
     ports:
      - "9003:8080"      
