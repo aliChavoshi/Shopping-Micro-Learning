@@ -17,6 +17,8 @@ COPY ["services/ordering/Ordering.Application/Ordering.Application.csproj", "ser
 COPY ["services/ordering/Ordering.Core/Ordering.Core.csproj", "services/ordering/Ordering.Core/"]
 #Rabbit MQ
 COPY ["Infrastructure/EventBus.Messages/EventBus.Messages.csproj", "Infrastructure/EventBus.Messages/"]
+#Logging
+COPY ["Infrastructure/Common.Logging/Common.Logging.csproj","Infrastructure/Common.Logging/"]
 RUN dotnet restore "./services/ordering/Ordering.Api/Ordering.Api.csproj"
 COPY . .
 WORKDIR "/src/services/ordering/Ordering.Api"

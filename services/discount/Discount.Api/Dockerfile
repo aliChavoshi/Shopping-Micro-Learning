@@ -15,6 +15,8 @@ COPY ["services/discount/Discount.Api/Discount.Api.csproj", "services/discount/D
 COPY ["services/discount/Discount.Application/Discount.Application.csproj", "services/discount/Discount.Application/"]
 COPY ["services/discount/Discount.Core/Discount.Core.csproj", "services/discount/Discount.Core/"]
 COPY ["services/discount/Discount.Infrastructure/Discount.Infrastructure.csproj", "services/discount/Discount.Infrastructure/"]
+#Logging
+COPY ["Infrastructure/Common.Logging/Common.Logging.csproj","Infrastructure/Common.Logging/"]
 RUN dotnet restore "./services/discount/Discount.Api/Discount.Api.csproj"
 COPY . .
 WORKDIR "/src/services/discount/Discount.Api"
