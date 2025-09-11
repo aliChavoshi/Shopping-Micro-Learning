@@ -7,7 +7,7 @@ namespace Common.Logging;
 
 public class Logging
 {
-    //Configuration for all of the errors and logs
+    //Configuration for all the errors and logs
     public static Action<HostBuilderContext, LoggerConfiguration> ConfigureLogger => (context, loggerConfiguration) =>
     {
         var env = context.HostingEnvironment;

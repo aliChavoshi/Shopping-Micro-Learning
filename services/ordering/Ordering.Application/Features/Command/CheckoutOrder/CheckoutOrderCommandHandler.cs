@@ -1,5 +1,6 @@
 ﻿using MapsterMapper;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using Ordering.Core.Entities;
 using Ordering.Core.Repositories;
 
@@ -17,13 +18,17 @@ public class CheckoutOrderCommand : IRequest<int>
     public PaymentMethodEnum PaymentMethod { get; set; }
 }
 
-public class CheckoutOrderCommandHandler(IOrderRepository orderRepository, IMapper mapper)
+public class CheckoutOrderCommandHandler(
+    IOrderRepository orderRepository,
+    IMapper mapper,
+    ILogger<CheckoutOrderCommandHandler> logger)
     : IRequestHandler<CheckoutOrderCommand, int>
 {
     public async Task<int> Handle(CheckoutOrderCommand request, CancellationToken cancellationToken)
     {
         var order = mapper.Map<Order>(request);
         var result = await orderRepository.AddAsync(order);
+        logger.LogInformation("CheckoutOrderCommandHandler CheckoutOrderCommand {OrderId}",result.Id);
         return result.Id;
     }
 }

@@ -11,7 +11,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Basket.Api.Controllers;
 
-public class BasketController(IMediator mediator, IPublishEndpoint publishEndpoint, IMapper mapper) : ApiController
+public class BasketController(
+    IMediator mediator,
+    IPublishEndpoint publishEndpoint,
+    IMapper mapper,
+    ILogger<BasketController> logger) : ApiController
 {
     [HttpGet("{userName}")]
     public async Task<ActionResult<ShoppingCartResponse>> GetBasketByUserName(string userName,
@@ -45,6 +49,8 @@ public class BasketController(IMediator mediator, IPublishEndpoint publishEndpoi
         var eventMsg = mapper.Map<BasketCheckoutEvent>(checkout);
         eventMsg.TotalPrice = basket.TotalPrice;
         await publishEndpoint.Publish(eventMsg);
+        logger.LogInformation("BasketCheckoutEvent {EventId} {DateTime} {UserName}", eventMsg.CorrelationId,
+            eventMsg.CreationDate, eventMsg.UserName);
         //Remove Basket
         var deleteCommand = new DeleteBasketCommand(checkout.UserName!);
         await mediator.Send(deleteCommand);

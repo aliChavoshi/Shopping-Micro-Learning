@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.Api.Controllers;
 
-public class CatalogController(IMediator mediator) : ApiController
+public class CatalogController(IMediator mediator, ILogger<CatalogController> logger) : ApiController
 {
     //IActionResult => no output
     //ActionResult => output 
@@ -32,6 +32,7 @@ public class CatalogController(IMediator mediator) : ApiController
         [FromQuery] GetAllProductsQuery request, CancellationToken cancellationToken)
     {
         var result = await mediator.Send(request, cancellationToken);
+        logger.LogInformation("CatalogController GetAllProducts GetAllProductsQuery {resultCount}", result.Count);
         return Ok(result);
     }
 
