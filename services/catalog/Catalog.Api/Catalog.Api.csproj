@@ -21,6 +21,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\Infrastructure\ClassLibrary1\Common.Logging\Common.Logging.csproj" />
 		<ProjectReference Include="..\Catalog.Infrastructure\Catalog.Infrastructure.csproj" />
 	</ItemGroup>
 

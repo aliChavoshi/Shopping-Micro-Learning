@@ -38,6 +38,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\Infrastructure\ClassLibrary1\Common.Logging\Common.Logging.csproj" />
 		<ProjectReference Include="..\..\..\Infrastructure\EventBus.Messages\EventBus.Messages.csproj" />
 		<ProjectReference Include="..\Ordering.Infrastructure\Ordering.Infrastructure.csproj" />
 	</ItemGroup>

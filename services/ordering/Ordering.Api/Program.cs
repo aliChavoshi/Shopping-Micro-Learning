@@ -1,4 +1,5 @@
 ﻿using Asp.Versioning;
+using Common.Logging;
 using EventBus.Messages.Common;
 using MassTransit;
 using Ordering.Api.EventBusConsumer;
@@ -6,8 +7,10 @@ using Ordering.Api.Extensions;
 using Ordering.Application;
 using Ordering.Infrastructure;
 using Ordering.Infrastructure.Data;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Host.UseSerilog(Logging.ConfigureLogger);
 builder.Services.AddControllers();
 //Register Versioning
 builder.Services.AddApiVersioning(options =>

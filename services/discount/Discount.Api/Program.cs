@@ -1,12 +1,15 @@
-using Discount.Application.Mapper;
-using Discount.Infrastructure.Extensions;
-using System.Reflection;
+using Common.Logging;
 using Discount.Api.Services;
+using Discount.Application.Mapper;
 using Discount.Application.Queries;
 using Discount.Core.Interfaces;
+using Discount.Infrastructure.Extensions;
 using Discount.Infrastructure.Services;
+using Serilog;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Host.UseSerilog(Logging.ConfigureLogger);
 // Add services to the container.
 builder.Services.AddControllers();
 //Register Mapper
