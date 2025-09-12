@@ -4,7 +4,7 @@ namespace Common.Logging.Correlations;
 
 public class CorrelationIdGenerator(IHttpContextAccessor accessor) : ICorrelationIdGenerator
 {
-    private const string HeaderName = "X-Correlation-Id";
+    private static readonly string HeaderName = CorrelationCommon.CorrelationIdHeader;
     private string? _cachedCorrelationId;
 
     public string? Get()

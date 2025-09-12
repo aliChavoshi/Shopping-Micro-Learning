@@ -77,7 +77,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger(); // فعال‌سازی Swagger
     app.UseSwaggerUI(); // فعال‌سازی رابط گرافیکی Swagger UI
 }
-
+//Correlation Logging
+app.AddCorrelationIdMiddleware();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

@@ -41,7 +41,8 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
     // app.MapOpenApi();
 }
-
+//Correlation Logging
+app.AddCorrelationIdMiddleware();
 app.UseRouting();
 app.MapGrpcService<DiscountService>();
 app.Map("/", async context =>
