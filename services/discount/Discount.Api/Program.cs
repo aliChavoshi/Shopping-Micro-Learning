@@ -1,4 +1,5 @@
 using Common.Logging;
+using Common.Logging.Correlations;
 using Discount.Api.Services;
 using Discount.Application.Mapper;
 using Discount.Application.Queries;
@@ -9,7 +10,11 @@ using Serilog;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+//Logging and ElasticSearch
 builder.Host.UseSerilog(Logging.ConfigureLogger);
+//Correlations
+builder.Services.AddScoped<ICorrelationIdGenerator, CorrelationIdGenerator>();
+builder.Services.AddHttpContextAccessor();
 // Add services to the container.
 builder.Services.AddControllers();
 //Register Mapper

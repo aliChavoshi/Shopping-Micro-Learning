@@ -9,9 +9,14 @@ using Discount.Application.Protos;
 using MassTransit;
 using Serilog;
 using System.Reflection;
+using Common.Logging.Correlations;
 
 var builder = WebApplication.CreateBuilder(args);
+//Logging and ElasticSearch
 builder.Host.UseSerilog(Logging.ConfigureLogger);
+//Correlations
+builder.Services.AddScoped<ICorrelationIdGenerator, CorrelationIdGenerator>();
+builder.Services.AddHttpContextAccessor();
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();

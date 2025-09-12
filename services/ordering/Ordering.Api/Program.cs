@@ -1,5 +1,6 @@
 ﻿using Asp.Versioning;
 using Common.Logging;
+using Common.Logging.Correlations;
 using EventBus.Messages.Common;
 using MassTransit;
 using Ordering.Api.EventBusConsumer;
@@ -10,7 +11,12 @@ using Ordering.Infrastructure.Data;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+//Logging and ElasticSearch
 builder.Host.UseSerilog(Logging.ConfigureLogger);
+//Correlations
+builder.Services.AddScoped<ICorrelationIdGenerator, CorrelationIdGenerator>();
+builder.Services.AddHttpContextAccessor();
+//DI
 builder.Services.AddControllers();
 //Register Versioning
 builder.Services.AddApiVersioning(options =>
