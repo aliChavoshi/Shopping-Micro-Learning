@@ -10,8 +10,10 @@ using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Basket.Api.Controllers;
+namespace Basket.Api.Controllers.V1;
 
+[ApiVersion("1")]
+// [ApiVersion("2")]
 public class BasketController : ApiController
 {
     private readonly IMediator _mediator;
@@ -34,6 +36,7 @@ public class BasketController : ApiController
     }
 
     [HttpGet("{userName}")]
+    // [MapToApiVersion("1")]
     public async Task<ActionResult<ShoppingCartResponse>> GetBasketByUserName(string userName,
         CancellationToken cancellationToken)
     {
@@ -42,6 +45,7 @@ public class BasketController : ApiController
     }
 
     [HttpPost]
+    // [MapToApiVersion("2")]
     public async Task<ActionResult<ShoppingCartResponse>> CreateBasket([FromBody] CreateBasketCommand request,
         CancellationToken cancellationToken)
     {
@@ -55,7 +59,7 @@ public class BasketController : ApiController
         return Ok(await _mediator.Send(new DeleteBasketCommand(userName), cancellationToken));
     }
 
-    //RabbiMQ
+    //RabbitMQ
     [HttpPost]
     public async Task<IActionResult> Checkout([FromBody] BasketCheckout checkout)
     {
