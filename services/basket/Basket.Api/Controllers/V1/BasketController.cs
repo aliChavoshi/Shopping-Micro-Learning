@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Asp.Versioning;
+using AutoMapper;
 using Basket.Application.Commands.CreateBasket;
 using Basket.Application.Commands.DeleteBasket;
 using Basket.Application.Queries.GetBasket;
@@ -12,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Basket.Api.Controllers.V1;
 
-[ApiVersion("1")]
+[ApiVersion("1.0")]
 // [ApiVersion("2")]
 public class BasketController : ApiController
 {

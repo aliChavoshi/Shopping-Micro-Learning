@@ -1,15 +1,19 @@
 ﻿using Asp.Versioning;
+using Asp.Versioning.ApiExplorer;
+using Basket.Api.SwaggerOptions;
 using Basket.Application.GrpcService;
 using Basket.Application.Mapper;
 using Basket.Application.Queries.GetBasket;
 using Basket.Core.Repository;
 using Basket.Infrastructure.Services;
 using Common.Logging;
+using Common.Logging.Correlations;
 using Discount.Application.Protos;
 using MassTransit;
+using Microsoft.Extensions.Options;
 using Serilog;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
-using Common.Logging.Correlations;
 
 var builder = WebApplication.CreateBuilder(args);
 //Logging and ElasticSearch
@@ -38,13 +42,21 @@ builder.Services.AddMassTransit(configuration =>
 builder.Services.AddMassTransitHostedService();
 //Register Automapper
 builder.Services.AddAutoMapper(typeof(ProfileMapper));
-//Register Versioning
+//API Versioning
 builder.Services.AddApiVersioning(options =>
 {
-    options.DefaultApiVersion = new ApiVersion(1, 0);
-    options.AssumeDefaultVersionWhenUnspecified = true;
-    options.ReportApiVersions = true;
+    options.DefaultApiVersion = new ApiVersion(1, 0); //Set Default API Versioning
+    options.AssumeDefaultVersionWhenUnspecified = true; // default version using 
+    options.ReportApiVersions = true; // add API Versioning to the response Header
+}).AddApiExplorer(option =>
+{
+    option.SubstituteApiVersionInUrl = true; //Enable version Substitute in route URLs
 });
+// Add Swagger services
+builder.Services.AddEndpointsApiExplorer(); // برای پشتیبانی از endpoint ها
+builder.Services.AddSwaggerGen();
+builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, SwaggerConfigOptions>();
+
 //Register Mediator
 var assemblies = new Assembly[]
 {
@@ -53,13 +65,6 @@ var assemblies = new Assembly[]
 };
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies));
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
-
-// Add Swagger services
-builder.Services.AddEndpointsApiExplorer(); // برای پشتیبانی از endpoint ها
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new() { Title = "Basket.Api", Version = "v1", Description = "Basket API" });
-});
 
 //Redis Configuration
 builder.Services.AddStackExchangeRedisCache(options =>
@@ -74,9 +79,18 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     app.MapOpenApi();
-    app.UseSwagger(); // فعال‌سازی Swagger
-    app.UseSwaggerUI(); // فعال‌سازی رابط گرافیکی Swagger UI
+    //Swagger UI Configuration
+    app.UseSwagger(); // generate json file
+    app.UseSwaggerUI(c =>
+    {
+        var versionDocProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+        foreach (var desc in versionDocProvider.ApiVersionDescriptions)
+        {
+            c.SwaggerEndpoint($"{desc.GroupName}/swagger.json", $"Basket.API - {desc.GroupName}");
+        }
+    }); // فعال‌سازی رابط گرافیکی Swagger UI
 }
+
 //Correlation Logging
 app.AddCorrelationIdMiddleware();
 app.UseAuthorization();

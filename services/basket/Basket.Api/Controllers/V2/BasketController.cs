@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Asp.Versioning;
+using AutoMapper;
 using Basket.Application.Commands.DeleteBasket;
 using Basket.Application.Queries.GetBasket;
 using Basket.Core.Entities;
@@ -10,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Basket.Api.Controllers.V2;
 
-[ApiVersion("2")]
+[ApiVersion("2.0")]
 public class BasketController(
     IMediator mediator,
     IMapper mapper,
@@ -21,6 +22,7 @@ public class BasketController(
     [HttpPost]
     public async Task<IActionResult> Checkout([FromBody] BasketCheckoutV2 checkout)
     {
+        //TODO
         var query = new GetBasketByUserNameQuery(checkout!.UserName!);
         var basket = await mediator.Send(query);
         //Publish Message in the RabbitMQ => Order Consumer
