@@ -3,7 +3,6 @@ using AutoMapper;
 using Basket.Application.Commands.DeleteBasket;
 using Basket.Application.Queries.GetBasket;
 using Basket.Core.Entities;
-using EventBus.Messages.Events;
 using EventBus.Messages.Events.CheckoutV2;
 using MassTransit;
 using MediatR;
