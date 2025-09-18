@@ -1,4 +1,5 @@
-﻿using Asp.Versioning;
+﻿using System.Reflection;
+using Asp.Versioning;
 using Common.Logging;
 using Common.Logging.Correlations;
 using EventBus.Messages.Common;
@@ -28,16 +29,28 @@ builder.Services.AddApiVersioning(options =>
 builder.Services.AddOpenApi();
 //Rabbit MQ : Consumer
 builder.Services.AddScoped<BasketOrderingConsumer>();
+builder.Services.AddScoped<BasketOrderingConsumerV2>();
 builder.Services.AddMassTransit(configuration =>
 {
-    configuration.AddConsumer<BasketOrderingConsumer>();
+    // 1
+    // configuration.AddConsumer<BasketOrderingConsumer>();
+    // configuration.AddConsumer<BasketOrderingConsumerV2>();
+    // OR : 2
+    configuration.AddConsumers(Assembly.GetExecutingAssembly());
     configuration.UsingRabbitMq((context, cfg) =>
     {
+        //Host
         cfg.Host(builder.Configuration["EventBusSettings:HostAddress"]);
         //provide Queue Name with Consumer Settings
+        // V1
         cfg.ReceiveEndpoint(EventBusConstant.BasketCheckoutEvent, e =>
         {
             e.ConfigureConsumer<BasketOrderingConsumer>(context);
+        });
+        // V2
+        cfg.ReceiveEndpoint(EventBusConstant.BasketCheckoutEventV2, e =>
+        {
+            e.ConfigureConsumer<BasketOrderingConsumerV2>(context);
         });
     });
 });

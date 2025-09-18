@@ -17,6 +17,6 @@ public class CheckoutOrderCommandValidatorsV2 : AbstractValidator<CheckoutOrderC
         RuleFor(x => x.TotalPrice)
             .NotEmpty()
             .WithMessage("{TotalPrice} is required")
-            .GreaterThanOrEqualTo(1)
+            .GreaterThanOrEqualTo(1);
     }
 }

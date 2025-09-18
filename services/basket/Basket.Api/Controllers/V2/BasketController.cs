@@ -21,7 +21,6 @@ public class BasketController(
     [HttpPost]
     public async Task<IActionResult> Checkout([FromBody] BasketCheckoutV2 checkout)
     {
-        //TODO
         var query = new GetBasketByUserNameQuery(checkout!.UserName!);
         var basket = await mediator.Send(query);
         //Publish Message in the RabbitMQ => Order Consumer
