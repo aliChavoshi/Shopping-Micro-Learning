@@ -161,3 +161,18 @@ services:
      - elasticsearch
     ports:
      - "9003:8080"      
+  
+  # Ocelot Api Gateway 9010
+  ocelot.apigateways:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - "ElasticConfiguration__Uri=http://elasticsearch:9200"
+    depends_on:
+      - catalog.api
+      - basket.api  
+      - ordering.api
+      - discount.api
+    ports:
+      - "9010:8080"
+

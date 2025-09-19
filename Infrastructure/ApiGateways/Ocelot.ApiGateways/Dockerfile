@@ -5,13 +5,14 @@ FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
 USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
-
+# EXPOSE 8081 
 
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Infrastructure/ApiGateways/Ocelot.ApiGateways/Ocelot.ApiGateways.csproj", "Infrastructure/ApiGateways/Ocelot.ApiGateways/"]
+COPY ["Infrastructure/ClassLibrary1/Common.Logging/Common.Logging.csproj", "Infrastructure/ClassLibrary1/Common.Logging/"]
 RUN dotnet restore "./Infrastructure/ApiGateways/Ocelot.ApiGateways/Ocelot.ApiGateways.csproj"
 COPY . .
 WORKDIR "/src/Infrastructure/ApiGateways/Ocelot.ApiGateways"
