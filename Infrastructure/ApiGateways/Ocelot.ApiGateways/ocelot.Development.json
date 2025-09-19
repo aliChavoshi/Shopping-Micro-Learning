@@ -149,7 +149,7 @@
     },
     // DeleteBasket
     {
-      "DownstreamPathTemplate": "/api/v1/Basket/DeleteBasketByUserName/{userName}",
+      "DownstreamPathTemplate": "/api/v1/Basket/DeleteBasket/{userName}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -173,7 +173,7 @@
         }
       ],
       "UpstreamPathTemplate": "/Basket/CreateBasket",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": [ "POST" ],
       //"AuthenticationOptions": {
       //  "AuthenticationProviderKey": "BasketAuthScheme",
       //  "AllowedScopes": [ "basketapi" ],
