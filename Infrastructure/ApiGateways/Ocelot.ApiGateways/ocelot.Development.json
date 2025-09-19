@@ -20,7 +20,7 @@
       //  "RequireHttpsMetadata": false
       //},
       //important
-      //"DelegatingHandlers": [ "CorrelationDelegatingHandler" ]
+      "DelegatingHandlers": [ "CorrelationDelegateHandler" ]
     },
     // /Catalog/GetAllProducts to GetAllProducts
     {
@@ -42,7 +42,7 @@
       //  "RequireHttpsMetadata": false
       //},
       //important
-      //"DelegatingHandlers": [ "CorrelationDelegatingHandler" ]
+      "DelegatingHandlers": [ "CorrelationDelegateHandler" ]
     },
     // Get Product by Id
     {
@@ -64,7 +64,7 @@
       //  "RequireHttpsMetadata": false
       //},
       //important
-      //"DelegatingHandlers": [ "CorrelationDelegatingHandler" ]
+      "DelegatingHandlers": [ "CorrelationDelegateHandler" ]
     },
     // GetAllBrands
     {
@@ -86,7 +86,7 @@
       //  "RequireHttpsMetadata": false
       //},
       //important
-      //"DelegatingHandlers": [ "CorrelationDelegatingHandler" ]
+      "DelegatingHandlers": [ "CorrelationDelegateHandler" ]
     },
     // GetAllTypes
     {
@@ -108,7 +108,7 @@
       //  "RequireHttpsMetadata": false
       //},
       ////important
-      //"DelegatingHandlers": [ "CorrelationDelegatingHandler" ]
+      "DelegatingHandlers": [ "CorrelationDelegateHandler" ]
     },
     // GetProductsByName
     {
@@ -130,7 +130,7 @@
       //  "RequireHttpsMetadata": false
       //},
       ////important
-      //"DelegatingHandlers": [ "CorrelationDelegatingHandler" ]
+      "DelegatingHandlers": [ "CorrelationDelegateHandler" ]
     },
     // GetBasket
     {
@@ -145,7 +145,7 @@
       "UpstreamPathTemplate": "/Basket/GetBasketByUserName/{userName}",
       "UpstreamHttpMethod": [ "GET" ],
       //important
-      //"DelegatingHandlers": [ "CorrelationDelegatingHandler" ]
+      "DelegatingHandlers": [ "CorrelationDelegateHandler" ]
     },
     // DeleteBasket
     {
@@ -160,7 +160,7 @@
       "UpstreamPathTemplate": "/Basket/DeleteBasketByUserName/{userName}",
       "UpstreamHttpMethod": [ "DELETE" ],
       //important
-      //"DelegatingHandlers": [ "CorrelationDelegatingHandler" ]
+      "DelegatingHandlers": [ "CorrelationDelegateHandler" ]
     },
     // CreateBasket
     {
@@ -180,7 +180,7 @@
       //  "Authority": "https://host.docker.internal:9009",
       //  "RequireHttpsMetadata": false
       //},
-      //"DelegatingHandlers": [ "CorrelationDelegatingHandler" ]
+      "DelegatingHandlers": [ "CorrelationDelegateHandler" ]
     },
     // Checkout Basket
     {
@@ -195,7 +195,7 @@
       "UpstreamPathTemplate": "/Basket/Checkout",
       "UpstreamHttpMethod": [ "POST" ],
       //important
-      //"DelegatingHandlers": [ "CorrelationDelegatingHandler" ],
+      "DelegatingHandlers": [ "CorrelationDelegateHandler" ],
       "RateLimitOptions": {
         "ClientWhitelist": [],
         "EnableRateLimiting": true,
@@ -217,7 +217,7 @@
       "UpstreamPathTemplate": "/Basket/CheckoutV2",
       "UpstreamHttpMethod": [ "POST" ],
       //important
-      //"DelegatingHandlers": [ "CorrelationDelegatingHandler" ],
+      "DelegatingHandlers": [ "CorrelationDelegateHandler" ],
       "RateLimitOptions": {
         "ClientWhitelist": [],
         "EnableRateLimiting": true,
@@ -239,7 +239,7 @@
       "UpstreamPathTemplate": "/Discount/{productName}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
       //important
-      //"DelegatingHandlers": [ "CorrelationDelegatingHandler" ]
+      "DelegatingHandlers": [ "CorrelationDelegateHandler" ]
     }
   ],
   "GlobalConfiguration": {

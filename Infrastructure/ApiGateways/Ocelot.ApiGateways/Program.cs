@@ -1,5 +1,6 @@
 ﻿using Common.Logging;
 using Common.Logging.Correlations;
+using Ocelot.ApiGateways.Handlers;
 using Ocelot.Cache.CacheManager;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
@@ -8,8 +9,16 @@ using Serilog;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Host.UseSerilog(Logging.ConfigureLogger);
-//Add Ocelot
-builder.Services.AddOcelot().AddCacheManager(o => o.WithDictionaryHandle());
+// -----------------------------
+// Add Correlation ID
+// -----------------------------
+builder.Services.AddTransient<ICorrelationIdGenerator, CorrelationIdGenerator>();
+builder.Services.AddTransient<CorrelationDelegateHandler>(); //TODO
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddOcelot()
+    .AddDelegatingHandler<CorrelationDelegateHandler>()
+    .AddCacheManager(o => o.WithDictionaryHandle());
 // -----------------------------
 // بارگذاری پیکربندی Ocelot
 // -----------------------------
@@ -18,12 +27,6 @@ builder.Host.ConfigureAppConfiguration((env, config) =>
     var environmentName = env.HostingEnvironment?.EnvironmentName ?? "Development";
     config.AddJsonFile($"ocelot.{environmentName}.json", optional: true, reloadOnChange: true);
 });
-// -----------------------------
-// Add Correlation ID
-// -----------------------------
-builder.Services.AddTransient<ICorrelationIdGenerator, CorrelationIdGenerator>();
-// builder.Services.AddTransient<CorrelationDelegatingHandler>(); //TODO
-builder.Services.AddHttpContextAccessor();
 // -----------------------------
 // End Correlation ID
 // -----------------------------
