@@ -9,6 +9,8 @@ public static class Config
         {
             new IdentityResources.OpenId(),
             new IdentityResources.Profile(),
+            new IdentityResources.Phone(),
+            new IdentityResources.Email()
         };
 
     public static IEnumerable<ApiScope> ApiScopes =>
@@ -17,6 +19,14 @@ public static class Config
             new ApiScope("scope1"),
             new ApiScope("scope2"),
         };
+
+    public static IEnumerable<ApiResource> ApiResources =>
+    [
+        new ApiResource("resource1")
+        {
+            Scopes = { "scope1" }
+        }
+    ];
 
     public static IEnumerable<Client> Clients =>
         new Client[]
@@ -27,7 +37,7 @@ public static class Config
                 ClientId = "m2m.client",
                 ClientName = "Client Credentials Client",
 
-                AllowedGrantTypes = GrantTypes.ClientCredentials,
+                AllowedGrantTypes = GrantTypes.ClientCredentials, //without login user
                 ClientSecrets = { new Secret("511536EF-F270-4058-80CA-1C89C192F69A".Sha256()) },
 
                 AllowedScopes = { "scope1" }
