@@ -14,7 +14,6 @@ WORKDIR /src
 COPY ["Infrastructure/ApiGateways/Ocelot.ApiGateways/Ocelot.ApiGateways.csproj", "Infrastructure/ApiGateways/Ocelot.ApiGateways/"]
 #Logging
 COPY ["Infrastructure/Common.Logging/Common.Logging.csproj","Infrastructure/Common.Logging/"]
-#COPY ["Infrastructure/ClassLibrary1/Common.Logging/Common.Logging.csproj", "Infrastructure/ClassLibrary1/Common.Logging/"]
 RUN dotnet restore "./Infrastructure/ApiGateways/Ocelot.ApiGateways/Ocelot.ApiGateways.csproj"
 COPY . .
 WORKDIR "/src/Infrastructure/ApiGateways/Ocelot.ApiGateways"

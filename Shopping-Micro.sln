@@ -51,11 +51,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.Messages", "Infrastructure\EventBus.Messages\EventBus.Messages.csproj", "{0F2F6A47-4AD8-4F23-B1B3-A8EBCB32378A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Logging", "Infrastructure\ClassLibrary1\Common.Logging\Common.Logging.csproj", "{53C307EB-AAEC-45AF-B4BB-BC41A0C711CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Logging", "Infrastructure\Common.Logging\Common.Logging.csproj", "{53C307EB-AAEC-45AF-B4BB-BC41A0C711CD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateways", "ApiGateways", "{BE1E2FA2-3DB8-4513-B46E-A414068E2216}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocelot.ApiGateways", "Infrastructure\ApiGateways\Ocelot.ApiGateways\Ocelot.ApiGateways.csproj", "{0ECE73B9-9112-452E-9455-C8A563D268EB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocelot.ApiGateways", "ApiGateways\Ocelot.ApiGateways\Ocelot.ApiGateways.csproj", "{0ECE73B9-9112-452E-9455-C8A563D268EB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer", "Infrastructure\IdentityServer\IdentityServer.csproj", "{7DBB7162-B7EC-1524-BAC9-F965700D4B53}"
 EndProject
