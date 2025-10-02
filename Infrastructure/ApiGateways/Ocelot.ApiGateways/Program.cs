@@ -71,43 +71,42 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 return Task.CompletedTask;
             }
         };
+    })
+    .AddJwtBearer("BasketAuthScheme", options =>
+    {
+        options.Authority = identityUrl;
+        options.Audience = "Basket";
+        options.RequireHttpsMetadata = false;
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = identityUrl
+        };
+        options.BackchannelHttpHandler = new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+        };
+        options.Events = new JwtBearerEvents
+        {
+            OnAuthenticationFailed = ctx =>
+            {
+                Log.Error(ctx.Exception, "JWT Authentication failed for BasketAuthScheme");
+                return Task.CompletedTask;
+            },
+            OnChallenge = ctx =>
+            {
+                Log.Warning(
+                    "JWT Challenge triggered for BasketAuthScheme. Error: {Error}, Description: {ErrorDescription}",
+                    ctx.Error, ctx.ErrorDescription);
+                return Task.CompletedTask;
+            },
+            OnForbidden = ctx =>
+            {
+                Log.Warning("JWT Forbidden for BasketAuthScheme. User: {User}", ctx.HttpContext.User?.Identity?.Name);
+                return Task.CompletedTask;
+            }
+        };
     });
-    // .AddJwtBearer("BasketAuthScheme", options =>
-    // {
-    //     //options.Authority = "https://localhost:9009";
-    //     options.Authority = "https://host.docker.internal:9009";
-    //     options.Audience = "Basket";
-    //     options.RequireHttpsMetadata = false;
-    //     options.TokenValidationParameters = new TokenValidationParameters
-    //     {
-    //         ValidateIssuer = true,
-    //         ValidIssuer = "https://host.docker.internal:9009"
-    //     };
-    //     options.BackchannelHttpHandler = new HttpClientHandler
-    //     {
-    //         ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-    //     };
-    //     options.Events = new JwtBearerEvents
-    //     {
-    //         OnAuthenticationFailed = ctx =>
-    //         {
-    //             Log.Error(ctx.Exception, "JWT Authentication failed for BasketAuthScheme");
-    //             return Task.CompletedTask;
-    //         },
-    //         OnChallenge = ctx =>
-    //         {
-    //             Log.Warning(
-    //                 "JWT Challenge triggered for BasketAuthScheme. Error: {Error}, Description: {ErrorDescription}",
-    //                 ctx.Error, ctx.ErrorDescription);
-    //             return Task.CompletedTask;
-    //         },
-    //         OnForbidden = ctx =>
-    //         {
-    //             Log.Warning("JWT Forbidden for BasketAuthScheme. User: {User}", ctx.HttpContext.User?.Identity?.Name);
-    //             return Task.CompletedTask;
-    //         }
-    //     };
-    // });
 
 #endregion
 

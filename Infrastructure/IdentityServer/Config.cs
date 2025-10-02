@@ -7,7 +7,12 @@ public static class Config
     //Catalog
     private const string CatalogApiScope = "catalogapi";
     private const string CatalogApiReadScope = "catalogapi.read";
+
     private const string CatalogApiWriteScope = "catalogapi.write";
+
+    //Basket
+    private const string BasketApiScope = "basketapi";
+
     //End Catalog
     public static IEnumerable<IdentityResource> IdentityResources =>
     [
@@ -22,26 +27,40 @@ public static class Config
         new(CatalogApiScope, "Catalog Scope"),
         new(CatalogApiReadScope, "Catalog Read Scope"),
         new(CatalogApiWriteScope, "Catalog Write Scope"),
+        new(BasketApiScope, "Basket Scope")
     ];
 
     public static IEnumerable<ApiResource> ApiResources =>
     [
         new("Catalog", "Catalog.API")
         {
-            Scopes = { CatalogApiReadScope , CatalogApiWriteScope }
+            Scopes = { CatalogApiReadScope, CatalogApiWriteScope }
+        },
+        new("Basket", "Basket.API")
+        {
+            Scopes = { BasketApiScope }
         }
     ];
 
     public static IEnumerable<Client> Clients =>
     [
         // m2m ClientCredentials 
-         new()
+        new()
         {
-             ClientName = "Catalog Api Client",
-             ClientId = "CatalogApiClient",
-             AllowedScopes = { CatalogApiReadScope, CatalogApiWriteScope },
-             AllowedGrantTypes = GrantTypes.ClientCredentials,
-             ClientSecrets = { new Secret("511536EF-F270-4058-80CA-1C89C192F69A".Sha256()) },
-         },
+            ClientName = "Catalog Api Client",
+            ClientId = "CatalogApiClient",
+            AllowedScopes = { CatalogApiReadScope, CatalogApiWriteScope },
+            AllowedGrantTypes = GrantTypes.ClientCredentials,
+            ClientSecrets = { new Secret("511536EF-F270-4058-80CA-1C89C192F69A".Sha256()) },
+        },
+        //m2m ClientCredentials
+        new()
+        {
+            ClientName = "Basket Api Client",
+            ClientId = "BasketApiClient",
+            AllowedScopes = { BasketApiScope },
+            AllowedGrantTypes = GrantTypes.ClientCredentials,
+            ClientSecrets = { new Secret("511536CF-F270-4058-80CA-1C89C192F69A".Sha256()) },
+        },
     ];
 }

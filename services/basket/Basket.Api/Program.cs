@@ -10,7 +10,11 @@ using Common.Logging;
 using Common.Logging.Correlations;
 using Discount.Application.Protos;
 using MassTransit;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
@@ -71,6 +75,58 @@ builder.Services.AddStackExchangeRedisCache(options =>
 {
     options.Configuration = builder.Configuration.GetConnectionString("Redis");
 });
+
+#region Identity
+
+var authorizationPolicy = new AuthorizationPolicyBuilder()
+    .RequireAuthenticatedUser()
+    .Build();
+
+builder.Services.AddControllers(config =>
+{
+    config.Filters.Add(new AuthorizeFilter(authorizationPolicy)); // Apply global authorization policy
+});
+
+// Configure JWT Bearer Authentication
+const string identityUrl = "https://host.docker.internal:9009";
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        // IdentityServer URL برای Docker
+        options.Authority = identityUrl;
+        options.Audience = "Basket";
+        options.RequireHttpsMetadata = false;
+        options.BackchannelHttpHandler = new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+        };
+
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidAudiences = ["Basket"],
+            ValidIssuers = [identityUrl]
+        };
+
+        options.IncludeErrorDetails = true;
+
+        options.Events = new JwtBearerEvents
+        {
+            OnAuthenticationFailed = context =>
+            {
+                Console.WriteLine($"Auth failed: {context.Exception.Message}");
+                return Task.CompletedTask;
+            },
+            OnTokenValidated = context =>
+            {
+                Console.WriteLine("Token validated successfully.");
+                return Task.CompletedTask;
+            }
+        };
+    });
+
+#endregion
 //Build
 var app = builder.Build();
 
@@ -93,6 +149,7 @@ if (app.Environment.IsDevelopment())
 
 //Correlation Logging
 app.AddCorrelationIdMiddleware();
+app.UseAuthentication(); // Identity
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

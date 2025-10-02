@@ -29,7 +29,7 @@ internal static class HostingExtensions
                 options.Events.RaiseSuccessEvents = true;
                 options.EmitStaticAudienceClaim = true;
                 //Impotant
-                options.IssuerUri = "https://localhost:9009"; //aud in jwt toekn : TODO
+                options.IssuerUri = "https://localhost:9009";
             })
             .AddInMemoryIdentityResources(Config.IdentityResources)
             .AddInMemoryApiScopes(Config.ApiScopes)

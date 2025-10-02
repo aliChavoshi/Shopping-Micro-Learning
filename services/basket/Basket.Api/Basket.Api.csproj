@@ -25,6 +25,7 @@
 		<!-- Swagger -->
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.4" />
 		<!-- End Swagger -->
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.9" />
 	</ItemGroup>
 
 	<ItemGroup>
