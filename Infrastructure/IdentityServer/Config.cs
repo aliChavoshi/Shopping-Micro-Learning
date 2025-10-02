@@ -4,34 +4,37 @@ namespace IdentityServer;
 
 public static class Config
 {
+    //Catalog
+    private const string CatalogApiScope = "catalogapi";
+    private const string CatalogApiReadScope = "catalogapi.read";
+    private const string CatalogApiWriteScope = "catalogapi.write";
+    //End Catalog
     public static IEnumerable<IdentityResource> IdentityResources =>
-        new IdentityResource[]
-        {
-            new IdentityResources.OpenId(),
-            new IdentityResources.Profile(),
-            new IdentityResources.Phone(),
-            new IdentityResources.Email()
-        };
+    [
+        new IdentityResources.OpenId(),
+        new IdentityResources.Profile(),
+        new IdentityResources.Phone(),
+        new IdentityResources.Email()
+    ];
 
     public static IEnumerable<ApiScope> ApiScopes =>
-        new ApiScope[]
-        {
-            new ApiScope("scope1"),
-            new ApiScope("scope2"),
-        };
+    [
+        new(CatalogApiScope, "Catalog Scope"),
+        new(CatalogApiReadScope, "Catalog Read Scope"),
+        new(CatalogApiWriteScope, "Catalog Write Scope"),
+    ];
 
     public static IEnumerable<ApiResource> ApiResources =>
     [
-        new ApiResource("resource1")
+        new("Catalog", "Catalog.API")
         {
-            Scopes = { "scope1" }
+            Scopes = { CatalogApiReadScope , CatalogApiWriteScope }
         }
     ];
 
     public static IEnumerable<Client> Clients =>
-        new Client[]
-        {
-            // m2m client credentials flow client
+    [
+        // m2m client credentials flow client
             new Client
             {
                 ClientId = "m2m.client",
@@ -57,6 +60,6 @@ public static class Config
 
                 AllowOfflineAccess = true,
                 AllowedScopes = { "openid", "profile", "scope2" }
-            },
-        };
+            }
+    ];
 }

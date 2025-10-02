@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.Api.Controllers;
 
@@ -6,4 +7,5 @@ namespace Catalog.Api.Controllers;
 [Route("api/v{version:apiVersion}/[controller]/[action]")]
 //api/v1/catalog/getAllProducts
 [ApiController]
+// [Authorize]
 public class ApiController : ControllerBase;
