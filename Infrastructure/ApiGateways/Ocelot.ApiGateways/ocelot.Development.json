@@ -13,12 +13,12 @@
       "UpstreamPathTemplate": "/Catalog",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
       //Authentication
-      //"AuthenticationOptions": {
-      //  "AuthenticationProviderKey": "CatalogAuthScheme",
-      //  "AllowedScopes": [ "catalogapi.read", "catalogapi.write" ],
-      //  "Authority": "https://host.docker.internal:9009",
-      //  "RequireHttpsMetadata": false
-      //},
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "CatalogAuthScheme",
+        "AllowedScopes": [ "catalogapi.read", "catalogapi.write" ],
+        "Authority": "https://host.docker.internal:9009", //Identity URL
+        "RequireHttpsMetadata": false
+      },
       //important
       "DelegatingHandlers": [ "CorrelationDelegateHandler" ]
     },
@@ -35,12 +35,12 @@
       "UpstreamPathTemplate": "/Catalog/GetAllProducts",
       "UpstreamHttpMethod": [ "GET", "DELETE" ],
       //Authentication
-      //"AuthenticationOptions": {
-      //  "AuthenticationProviderKey": "CatalogAuthScheme",
-      //  "AllowedScopes": [ "catalogapi.read", "catalogapi.write" ],
-      //  "Authority": "https://host.docker.internal:9009",
-      //  "RequireHttpsMetadata": false
-      //},
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "CatalogAuthScheme",
+        "AllowedScopes": [ "catalogapi.read", "catalogapi.write" ],
+        "Authority": "https://host.docker.internal:9009",
+        "RequireHttpsMetadata": false
+      },
       //important
       "DelegatingHandlers": [ "CorrelationDelegateHandler" ]
     },
@@ -57,12 +57,12 @@
       "UpstreamPathTemplate": "/Catalog/GetProductById/{id}",
       "UpstreamHttpMethod": [ "GET", "DELETE" ],
       //Authentication
-      //"AuthenticationOptions": {
-      //  "AuthenticationProviderKey": "CatalogAuthScheme",
-      //  "AllowedScopes": [ "catalogapi.read", "catalogapi.write" ],
-      //  "Authority": "https://host.docker.internal:9009",
-      //  "RequireHttpsMetadata": false
-      //},
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "CatalogAuthScheme",
+        "AllowedScopes": [ "catalogapi.read", "catalogapi.write" ],
+        "Authority": "https://host.docker.internal:9009",
+        "RequireHttpsMetadata": false
+      },
       //important
       "DelegatingHandlers": [ "CorrelationDelegateHandler" ]
     },
@@ -79,12 +79,12 @@
       "UpstreamPathTemplate": "/Catalog/GetAllBrands",
       "UpstreamHttpMethod": [ "GET", "DELETE" ],
       //Authentication
-      //"AuthenticationOptions": {
-      //  "AuthenticationProviderKey": "CatalogAuthScheme",
-      //  "AllowedScopes": [ "catalogapi.read", "catalogapi.write" ],
-      //  "Authority": "https://host.docker.internal:9009",
-      //  "RequireHttpsMetadata": false
-      //},
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "CatalogAuthScheme",
+        "AllowedScopes": [ "catalogapi.read", "catalogapi.write" ],
+        "Authority": "https://host.docker.internal:9009",
+        "RequireHttpsMetadata": false
+      },
       //important
       "DelegatingHandlers": [ "CorrelationDelegateHandler" ]
     },
@@ -101,12 +101,12 @@
       "UpstreamPathTemplate": "/Catalog/GetAllTypes",
       "UpstreamHttpMethod": [ "GET", "DELETE" ],
       //Authentication
-      //"AuthenticationOptions": {
-      //  "AuthenticationProviderKey": "CatalogAuthScheme",
-      //  "AllowedScopes": [ "catalogapi.read", "catalogapi.write" ],
-      //  "Authority": "https://host.docker.internal:9009",
-      //  "RequireHttpsMetadata": false
-      //},
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "CatalogAuthScheme",
+        "AllowedScopes": [ "catalogapi.read", "catalogapi.write" ],
+        "Authority": "https://host.docker.internal:9009",
+        "RequireHttpsMetadata": false
+      },
       ////important
       "DelegatingHandlers": [ "CorrelationDelegateHandler" ]
     },
@@ -123,12 +123,12 @@
       "UpstreamPathTemplate": "/Catalog/GetProductsByBrandName/{brand}",
       "UpstreamHttpMethod": [ "GET" ],
       //Authentication
-      //"AuthenticationOptions": {
-      //  "AuthenticationProviderKey": "CatalogAuthScheme",
-      //  "AllowedScopes": [ "catalogapi.read", "catalogapi.write" ],
-      //  "Authority": "https://host.docker.internal:9009",
-      //  "RequireHttpsMetadata": false
-      //},
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "CatalogAuthScheme",
+        "AllowedScopes": [ "catalogapi.read", "catalogapi.write" ],
+        "Authority": "https://host.docker.internal:9009",
+        "RequireHttpsMetadata": false
+      },
       ////important
       "DelegatingHandlers": [ "CorrelationDelegateHandler" ]
     },

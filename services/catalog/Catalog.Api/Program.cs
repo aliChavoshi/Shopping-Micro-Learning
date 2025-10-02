@@ -109,6 +109,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 //     options.AddPolicy("CanRead", policy => policy.RequireClaim("scope", "catalogapi.read"));
 //     options.AddPolicy("CanWrite", policy => policy.RequireClaim("scope", "catalogapi.write"));
 // });
+
 #endregion
 
 var app = builder.Build();
