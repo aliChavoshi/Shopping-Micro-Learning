@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36429.23
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11018.127 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
@@ -58,6 +58,27 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocelot.ApiGateways", "ApiGateways\Ocelot.ApiGateways\Ocelot.ApiGateways.csproj", "{0ECE73B9-9112-452E-9455-C8A563D268EB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer", "Infrastructure\IdentityServer\IdentityServer.csproj", "{7DBB7162-B7EC-1524-BAC9-F965700D4B53}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "client", "client\", "{F03FED76-20DB-B30E-51FF-188119B1BFB7}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_62097"
+		Debug.AspNetCompiler.PhysicalPath = "client\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_62097\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_62097"
+		Release.AspNetCompiler.PhysicalPath = "client\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_62097\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "62097"
+		SlnRelativePath = "client\"
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -149,6 +170,10 @@ Global
 		{7DBB7162-B7EC-1524-BAC9-F965700D4B53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DBB7162-B7EC-1524-BAC9-F965700D4B53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DBB7162-B7EC-1524-BAC9-F965700D4B53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F03FED76-20DB-B30E-51FF-188119B1BFB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F03FED76-20DB-B30E-51FF-188119B1BFB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F03FED76-20DB-B30E-51FF-188119B1BFB7}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{F03FED76-20DB-B30E-51FF-188119B1BFB7}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
