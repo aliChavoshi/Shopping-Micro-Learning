@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ToastMessage } from './core/services/toast-message';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +10,8 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('client');
+  toastMsg = inject(ToastMessage);
+  showMsg() {
+    this.toastMsg.showMessage('this is test', 'my title', 'success');
+  }
 }

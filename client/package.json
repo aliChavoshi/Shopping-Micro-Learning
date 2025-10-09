@@ -35,6 +35,7 @@
     "bootstrap": "^5.3.8",
     "express": "^5.1.0",
     "ngx-bootstrap": "^20.0.2",
+    "ngx-toastr": "^19.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },

@@ -2,3 +2,45 @@ body {
   min-height: 100vh;
   font-family: 'Vazir', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+/* toast Message */
+/* جهت راست‌به‌چپ */
+.toast-container {
+  direction: rtl !important;
+  font-family: "IRANSans", "Vazirmatn", sans-serif;
+}
+
+/* استایل عمومی همه Toastها */
+.custom-toast {
+  border-radius: 0.75rem;
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* رنگ‌بندی براساس نوع */
+.toast-success {
+  background-color: #198754 !important;
+  /* Bootstrap green */
+  color: #fff !important;
+}
+
+.toast-warning {
+  background-color: #ffc107 !important;
+  /* Bootstrap yellow */
+  color: #212529 !important;
+}
+
+.toast-info {
+  background-color: #0dcaf0 !important;
+  /* Bootstrap cyan */
+  color: #fff !important;
+}
+
+.toast-error {
+  background-color: #dc3545 !important;
+  /* Bootstrap red */
+  color: #fff !important;
+}
