@@ -13,12 +13,12 @@
       "UpstreamPathTemplate": "/Catalog",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
       //Authentication
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "CatalogAuthScheme",
-        "AllowedScopes": [ "catalogapi.read", "catalogapi.write" ],
-        "Authority": "https://host.docker.internal:9009", //Identity URL
-        "RequireHttpsMetadata": false
-      },
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "CatalogAuthScheme",
+      //  "AllowedScopes": [ "catalogapi.read", "catalogapi.write" ],
+      //  "Authority": "https://host.docker.internal:9009", //Identity URL
+      //  "RequireHttpsMetadata": false
+      //},
       //important
       "DelegatingHandlers": [ "CorrelationDelegateHandler" ]
     },

@@ -57,58 +57,58 @@ builder.Services.AddOpenApi();
 
 #region Identity
 
-var authorizationPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-builder.Services.AddControllers(config =>
-{
-    // [Authorize]
-    config.Filters.Add(new AuthorizeFilter(authorizationPolicy));
-});
-const string identityUrl = "https://host.docker.internal:9009"; // Identity URL for Docker
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.Authority = identityUrl;
-        options.Audience = "Catalog";
-        options.RequireHttpsMetadata = false; //https development
-        options.BackchannelHttpHandler = new HttpClientHandler
-        {
-            ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-        };
-        //Token Validation
-        options.TokenValidationParameters = new TokenValidationParameters()
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidAudiences =
-            [
-                "Catalog"
-            ],
-            ValidIssuers = [identityUrl]
-        };
-        //Logging
-        options.IncludeErrorDetails = true;
-        options.Events = new JwtBearerEvents
-        {
-            OnAuthenticationFailed = context =>
-            {
-                Console.WriteLine($"Auth failed: {context.Exception.Message}");
-                return Task.CompletedTask;
-            },
-            OnTokenValidated = context =>
-            {
-                Console.WriteLine("Token validated successfully.");
-                return Task.CompletedTask;
-            }
-        };
-    });
+//var authorizationPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+//builder.Services.AddControllers(config =>
+//{
+//    // [Authorize]
+//    config.Filters.Add(new AuthorizeFilter(authorizationPolicy));
+//});
+//const string identityUrl = "https://host.docker.internal:9009"; // Identity URL for Docker
+//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//    .AddJwtBearer(options =>
+//    {
+//        options.Authority = identityUrl;
+//        options.Audience = "Catalog";
+//        options.RequireHttpsMetadata = false; //https development
+//        options.BackchannelHttpHandler = new HttpClientHandler
+//        {
+//            ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+//        };
+//        //Token Validation
+//        options.TokenValidationParameters = new TokenValidationParameters()
+//        {
+//            ValidateIssuer = true,
+//            ValidateAudience = true,
+//            ValidAudiences =
+//            [
+//                "Catalog"
+//            ],
+//            ValidIssuers = [identityUrl]
+//        };
+//        //Logging
+//        options.IncludeErrorDetails = true;
+//        options.Events = new JwtBearerEvents
+//        {
+//            OnAuthenticationFailed = context =>
+//            {
+//                Console.WriteLine($"Auth failed: {context.Exception.Message}");
+//                return Task.CompletedTask;
+//            },
+//            OnTokenValidated = context =>
+//            {
+//                Console.WriteLine("Token validated successfully.");
+//                return Task.CompletedTask;
+//            }
+//        };
+//    });
 
-//TODO
-// Custom authorization policies
-// builder.Services.AddAuthorization(options =>
-// {
-//     options.AddPolicy("CanRead", policy => policy.RequireClaim("scope", "catalogapi.read"));
-//     options.AddPolicy("CanWrite", policy => policy.RequireClaim("scope", "catalogapi.write"));
-// });
+////TODO
+//// Custom authorization policies
+//// builder.Services.AddAuthorization(options =>
+//// {
+////     options.AddPolicy("CanRead", policy => policy.RequireClaim("scope", "catalogapi.read"));
+////     options.AddPolicy("CanWrite", policy => policy.RequireClaim("scope", "catalogapi.write"));
+//// });
 
 #endregion
 
