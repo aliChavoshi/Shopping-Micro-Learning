@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <i class="fas fa-shopping-bag me-2"></i>Premium Shopping
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">Shop</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/basket">Basket</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Brands</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">Contact</a>
+        </li>
+      </ul>
+
+      <div class="d-flex align-items-center gap-3">
+        <div class="search-container">
+          <div class="input-group">
+            <input type="text" class="form-control search-input" placeholder="Search products...">
+            <button class="btn search-btn">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+
+        <a href="#" class="text-white fs-5">
+          <i class="fas fa-heart"></i>
+        </a>
+        <a type="button" class="text-white fs-5 position-relative" routerLink="/basket">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+            style="font-size: small;">
+            3
+          </span>
+        </a>
+        <button class="btn text-white fs-5">
+          logout
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </button>
+        <button class="btn text-white fs-5">
+          login
+          <i class="fa-solid fa-right-to-bracket"></i>
+        </button>
+        <!-- <a (click)="register()" class="text-white fs-5">
+            Register
+            <i class="fa-solid fa-user"></i>
+          </a> -->
+      </div>
+    </div>
+  </div>
+</nav>

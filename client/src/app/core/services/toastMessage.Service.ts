@@ -4,7 +4,7 @@ import { IndividualConfig, ToastrService } from 'ngx-toastr';
 @Injectable({
   providedIn: 'root'
 })
-export class ToastMessage {
+export class ToastMessageService {
   private toast = inject(ToastrService);
   private baseConfig: Partial<IndividualConfig> = {
     timeOut: 5000,
