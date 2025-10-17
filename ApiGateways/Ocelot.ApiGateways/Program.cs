@@ -17,7 +17,20 @@ builder.Host.UseSerilog(Logging.ConfigureLogger);
 builder.Services.AddTransient<ICorrelationIdGenerator, CorrelationIdGenerator>();
 builder.Services.AddTransient<CorrelationDelegateHandler>(); //TODO
 builder.Services.AddHttpContextAccessor();
-
+// -----------------------------
+// Add CORS For Angular
+// -----------------------------
+var corsPolicyName = "AllowAllOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: corsPolicyName, policy =>
+    {
+        policy
+            .WithOrigins("http://localhost:4200")
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
 builder.Services.AddOcelot()
     .AddDelegatingHandler<CorrelationDelegateHandler>()
     .AddCacheManager(o => o.WithDictionaryHandle());
@@ -115,7 +128,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
-
+//CORS
+app.UseCors(corsPolicyName);
 app.UseRouting();
 //Identity Server
 app.UseAuthentication();
