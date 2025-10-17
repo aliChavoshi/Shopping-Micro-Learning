@@ -20,9 +20,7 @@ export class App {
     this.toastMsg.showMessage('this is test', 'my title', 'success');
   }
   constructor() {
-    this.http.get<any>(`${this.config.baseUrl}/catalog`, {
-      
-    }).subscribe({
+    this.http.get<any>(`${this.config.baseUrl}/catalog`).subscribe({
       next: (response) => {
         console.log("🚀 ~ App ~ constructor ~ response:", response)
       },

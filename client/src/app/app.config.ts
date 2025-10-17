@@ -5,7 +5,8 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { errorHandlingInterceptor } from './core/interceptors/error-handling-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,6 +16,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideToastr(), //Toast Message
     provideClientHydration(withEventReplay()),
-    provideHttpClient()
+    provideHttpClient(withInterceptors([errorHandlingInterceptor]))
   ]
 };
