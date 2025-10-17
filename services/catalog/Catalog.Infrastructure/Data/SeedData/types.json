@@ -1,18 +1,158 @@
 [
   {
     "Id": "63ca5d4bc3a8a58f47299f97",
-    "Name": "Shoes"
+    "Name": "Mascara"
   },
   {
-    "Id": "63ca5d6d958e43ee1cd375fe",
-    "Name": "Rackets"
+    "Id": "63ca5d4bc3a8a58f47299f98",
+    "Name": "Eyeshadow"
   },
   {
-    "Id": "63ca5d7d380402dce7f06ebc",
-    "Name": "Football"
+    "Id": "63ca5d4bc3a8a58f47299f99",
+    "Name": "Face Powder"
   },
   {
-    "Id": "63ca5d8849bc19321b8be5f1",
-    "Name": "Kit Bags"
+    "Id": "63ca5d4bc3a8a58f47299f9a",
+    "Name": "Lipstick"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299f9b",
+    "Name": "Nail Polish"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299f9c",
+    "Name": "Perfumes"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299f9d",
+    "Name": "Beds"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299f9e",
+    "Name": "Sofas"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299f9f",
+    "Name": "Bedside Tables"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fa0",
+    "Name": "Office Chairs"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fa1",
+    "Name": "Bathroom"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fa2",
+    "Name": "Fruits"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fa3",
+    "Name": "Meat"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fa4",
+    "Name": "Pet Supplies"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fa5",
+    "Name": "Cooking Essentials"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fa6",
+    "Name": "Vegetables"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fa7",
+    "Name": "Dairy"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fa8",
+    "Name": "Seafood"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fa9",
+    "Name": "Condiments"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299faa",
+    "Name": "Desserts"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fab",
+    "Name": "Beverages"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fac",
+    "Name": "Fruits"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fad",
+    "Name": "Health Supplements"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fae",
+    "Name": "Grains"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299faf",
+    "Name": "Household Essentials"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fb0",
+    "Name": "Home Decor"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fb1",
+    "Name": "Photo Frames"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fb2",
+    "Name": "Artificial Plants"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fb3",
+    "Name": "Plant Accessories"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fb4",
+    "Name": "Lighting"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fb5",
+    "Name": "Kitchen Tools"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fb6",
+    "Name": "Drinkware"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fb7",
+    "Name": "Kitchen Appliances"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fb8",
+    "Name": "Cookware"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fb9",
+    "Name": "Cutting Boards"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fba",
+    "Name": "Juicers"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fbb",
+    "Name": "Slicers"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fbc",
+    "Name": "Strainers"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fbd",
+    "Name": "Graters"
   }
 ]
