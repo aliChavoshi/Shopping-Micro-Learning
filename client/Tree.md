@@ -48,7 +48,6 @@ src/
 │ │ │
 │ │ ├─ products/
 │ │ │ ├─ components/                  # → product-card, product-filter, product-list
-│ │ │ ├─ pages/                       # → product-list-page, product-details-page
 │ │ │ ├─ services/                    # → products.service.ts, categories.service.ts
 │ │ │ ├─ models/                      # → product.model.ts, category.model.ts
 │ │ │ ├─ state/                       # → signals or store for products
@@ -59,7 +58,6 @@ src/
 │ │ │
 │ │ ├─ cart/
 │ │ │ ├─ components/                  # → cart-item, cart-summary
-│ │ │ ├─ pages/                       # → cart-page
 │ │ │ ├─ state/                       # → cart.store.ts or signal-based store
 │ │ │ ├─ services/                    # → cart.service.ts
 │ │ │ ├─ models/                      # → cart-item.model.ts

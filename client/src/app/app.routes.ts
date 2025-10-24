@@ -2,6 +2,16 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
+    path: 'store',
+    loadComponent: () => import('./features/store/components/store').then(x => x.Store),
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./features/store/components/store-home/store-home').then(x => x.StoreHome)
+      }
+    ]
+  },
+  {
     path: 'not-found',
     loadComponent: () => import('./features/pages/not-found/not-found').then(x => x.NotFound)
   },
