@@ -5,6 +5,8 @@ import { ToastMessageService } from './core/services/toastMessage.Service';
 import { Navbar } from "./pages/navbar/navbar";
 import { HttpClient } from '@angular/common/http';
 import { APP_CONFIG } from './core/config/appConfig.token';
+import { ICatalog } from './shared/models/products';
+import { IPaginate } from './shared/models/pagination';
 
 @Component({
   selector: 'app-root',
@@ -20,9 +22,9 @@ export class App {
     this.toastMsg.showMessage('this is test', 'my title', 'success');
   }
   constructor() {
-    this.http.get<any>(`${this.config.baseUrl}/catalog`).subscribe({
+    this.http.get<IPaginate<ICatalog>>(`${this.config.baseUrl}/catalog`).subscribe({
       next: (response) => {
-        console.log("🚀 ~ App ~ constructor ~ response:", response)
+        console.log("🚀 ~ App ~ constructor ~ response:", response.data)
       },
       error: (err) => {
         console.log("🚀 ~ App ~ constructor ~ err:", err)
