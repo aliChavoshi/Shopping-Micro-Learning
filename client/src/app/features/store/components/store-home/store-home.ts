@@ -2,12 +2,12 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { StoreService } from '../../services/store.service';
 import { IPaginate } from '../../../../shared/models/pagination';
 import { ICatalog } from '../../../../shared/models/products';
-import { Subscription } from 'rxjs';
-import { DecimalPipe } from '@angular/common';
+import { ProductItem } from "../product-item/product-item";
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 @Component({
   selector: 'app-store-home',
-  imports: [DecimalPipe],
+  imports: [ProductItem, PaginationModule],
   templateUrl: './store-home.html',
   styleUrl: './store-home.css'
 })
