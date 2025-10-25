@@ -12,21 +12,13 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
   styleUrl: './store-home.css'
 })
 export class StoreHome implements OnInit {
-  // private subscriptions = new Subscription();
-  paginate!: IPaginate<ICatalog>;
-  private storeService = inject(StoreService);
+  store = inject(StoreService);
 
   ngOnInit(): void {
     this.getAllProducts();
   }
   getAllProducts() {
-    let sub$ = this.storeService.getAllProducts().subscribe(res => {
-      console.log("🚀 ~ StoreHome ~ getAllProducts ~ res:", res)
-      this.paginate = res;
-    })
-    // this.subscriptions.add(sub$);
+    this.store.getAllProducts().subscribe()
   }
-  // ngOnDestroy(): void {
-  //   this.subscriptions.unsubscribe();
-  // }
+
 }

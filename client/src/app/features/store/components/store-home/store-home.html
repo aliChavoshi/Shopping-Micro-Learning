@@ -103,8 +103,8 @@
 
           <!-- Products Grid Placeholder -->
           <div class="row">
-            @if(paginate !== undefined){
-            @for (item of paginate.data; track $index) {
+            @if(store.products()?.data){
+            @for (item of store.products()?.data; track $index) {
             <div class="col-md-6 col-lg-4 mb-4">
               <app-product-item [item]="item"></app-product-item>
             </div>
@@ -112,20 +112,13 @@
             }
           </div>
           <!-- Pagination TODO -->
-          @if(paginate!==undefined){
+          @if(store.products()?.data){
           <div class="d-flex justify-content-center">
-            <pagination [boundaryLinks]="true" [totalItems]="paginate.count"
-             previousText="&lsaquo;"
-
-
-              [maxSize]="9"
-              nextText="&rsaquo;"
-              firstText="&laquo;"
-               lastText="&raquo;">
+            <pagination [boundaryLinks]="true" [totalItems]="store.products()?.count ?? 10" previousText="&lsaquo;"
+              [maxSize]="9" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
             </pagination>
           </div>
           }
-
         </div>
       </div>
     </div>
