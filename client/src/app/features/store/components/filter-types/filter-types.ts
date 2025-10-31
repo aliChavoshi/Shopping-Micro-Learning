@@ -12,12 +12,12 @@ import { NgClass } from '@angular/common';
 export class FilterTypes implements OnInit {
   store = inject(StoreService);
   selectedItem?: IType = { id: '', name: '' };
-  selectedType = output<IType | undefined>();
   ngOnInit(): void {
     this.store.getAllTypes().subscribe();
   }
   selectItem(id: string) {
     this.selectedItem = this.store.types()?.find(x => x.id == id);
-    this.selectedType.emit(this.selectedItem);
+    const params = { ...this.store.params(), typeId: id };
+    this.store.setParams(params);
   }
 }

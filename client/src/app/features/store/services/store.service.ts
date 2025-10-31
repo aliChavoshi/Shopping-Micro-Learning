@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { inject, Injectable, OnInit, signal } from '@angular/core';
+import { effect, inject, Injectable, OnInit, signal } from '@angular/core';
 import { APP_CONFIG } from '../../../core/config/appConfig.token';
 import { ToastMessageService } from '../../../core/services/toastMessage.Service';
 import { IPaginate } from '../../../shared/models/pagination';
@@ -13,7 +13,6 @@ import { ProductParams } from '../models/productParams';
 })
 export class StoreService {
   private config = inject(APP_CONFIG); //injection in the angular
-  toastMsg = inject(ToastMessageService);
   private http = inject(HttpClient);
   //#region signals
   products = signal<IPaginate<ICatalog> | null>(null);
@@ -21,7 +20,12 @@ export class StoreService {
   brands = signal<IBrand[] | null>(null);
   params = signal<ProductParams>(new ProductParams());
   //#endregion
-  constructor() { }
+  constructor() {
+    effect(() => {
+      const _ = this.params();
+      this.getAllProducts().subscribe();
+    });
+  }
 
   getAllProducts(): Observable<IPaginate<ICatalog>> {
     let params = this.generateProductsParams();
@@ -37,7 +41,6 @@ export class StoreService {
         tap(data => this.types.set(data))
       );
   }
-
   getAllBrands() {
     return this.http.get<IBrand[]>(`${this.config.baseUrl}/catalog/getAllBrands`)
       .pipe(
@@ -45,7 +48,6 @@ export class StoreService {
         tap(data => this.brands.set(data))
       );
   }
-
   setParams(parameters: ProductParams) {
     this.params.set(parameters);
   }

@@ -15,18 +15,6 @@ import { ProductParams } from '../../models/productParams';
 })
 export class StoreHome implements OnInit {
   store = inject(StoreService);
-  params = new ProductParams();
   ngOnInit(): void {
-    this.getAllProducts();
-    this.store.params();
-  }
-  getAllProducts() {
-    this.store.getAllProducts().subscribe()
-  }
-  changeType(type: IType | undefined) {
-    console.log("🚀 ~ StoreHome ~ params:", this.params)
-    this.params.typeId = type?.id;
-    this.store.setParams(this.params);
-    this.getAllProducts();
   }
 }
