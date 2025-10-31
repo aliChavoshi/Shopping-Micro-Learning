@@ -17,5 +17,7 @@ export class FilterBrands implements OnInit {
   }
   selectItem(brand: IBrand) {
     this.selectedItem = this.store.brands()?.find(x => x.id == brand.id);
+    const params = { ...this.store.params(), brandId: brand.id };
+    this.store.setParams(params);
   }
 }

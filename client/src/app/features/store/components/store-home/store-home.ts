@@ -13,8 +13,7 @@ import { ProductParams } from '../../models/productParams';
   templateUrl: './store-home.html',
   styleUrl: './store-home.css'
 })
-export class StoreHome implements OnInit {
+export class StoreHome {
   store = inject(StoreService);
-  ngOnInit(): void {
-  }
+
 }
