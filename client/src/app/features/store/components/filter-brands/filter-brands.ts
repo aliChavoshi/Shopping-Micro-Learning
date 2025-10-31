@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { StoreService } from '../../services/store.service';
-import { IBrand } from '../../../../shared/models/products';
+import { IBrand } from '../../models/products';
 import { NgClass } from '@angular/common';
 
 @Component({

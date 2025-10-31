@@ -5,7 +5,7 @@ import { ToastMessageService } from './core/services/toastMessage.Service';
 import { Navbar } from "./shared/components/navbar/navbar";
 import { HttpClient } from '@angular/common/http';
 import { APP_CONFIG } from './core/config/appConfig.token';
-import { ICatalog } from './shared/models/products';
+import { ICatalog } from './features/store/models/products';
 import { IPaginate } from './shared/models/pagination';
 
 @Component({
