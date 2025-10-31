@@ -4,7 +4,7 @@
   </h5>
   <ul class="list-group scrollable-list">
     @for (item of store.brands(); track $index) {
-    <li class="list-group-item py-4" onclick="selectCategory('Electronics')">
+    <li class="list-group-item py-4" [ngClass]="{'active': selectedItem?.id == item.id}" (click)="selectItem(item)">
       <i class="fas fa-laptop me-2"></i>{{item.name}}
     </li>
     }
