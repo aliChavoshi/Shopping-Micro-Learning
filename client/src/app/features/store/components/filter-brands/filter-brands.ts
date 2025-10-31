@@ -2,15 +2,14 @@ import { Component, inject, OnInit } from '@angular/core';
 import { StoreService } from '../../services/store.service';
 
 @Component({
-  selector: 'app-types',
+  selector: 'app-filter-brands',
   imports: [],
-  templateUrl: './types.html',
-  styleUrl: './types.css'
+  templateUrl: './filter-brands.html',
+  styleUrl: './filter-brands.css'
 })
-export class Types implements OnInit {
+export class FilterBrands implements OnInit {
   store = inject(StoreService);
   ngOnInit(): void {
-    this.store.getAllTypes().subscribe();
+    this.store.getAllBrands().subscribe();
   }
-
 }

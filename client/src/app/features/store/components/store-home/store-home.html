@@ -17,33 +17,10 @@
       <!-- Left Sidebar -->
       <div class="col-lg-4 col-md-6">
         <!-- Types -->
-        <app-types></app-types>
-
+        <app-filter-types></app-filter-types>
         <!-- Brands -->
-        <div class="brand-card">
-          <h5 class="section-title">
-            <i class="fas fa-star me-2"></i>Brands
-          </h5>
-          <ul class="list-group">
-            <li class="list-group-item" onclick="selectBrand('Apple')">
-              <i class="fab fa-apple me-2"></i>Apple
-            </li>
-            <li class="list-group-item active" onclick="selectBrand('Samsung')">
-              <i class="fas fa-mobile-alt me-2"></i>Samsung
-            </li>
-            <li class="list-group-item" onclick="selectBrand('Nike')">
-              <i class="fas fa-running me-2"></i>Nike
-            </li>
-            <li class="list-group-item" onclick="selectBrand('Adidas')">
-              <i class="fas fa-shoe-prints me-2"></i>Adidas
-            </li>
-            <li class="list-group-item" onclick="selectBrand('Sony')">
-              <i class="fas fa-headphones me-2"></i>Sony
-            </li>
-          </ul>
-        </div>
+        <app-filter-brands></app-filter-brands>
       </div>
-
       <!-- Right Content -->
       <div class="col-lg-8 col-md-6 mt-4 mt-md-0">
         <div class="search-section">
@@ -102,4 +79,3 @@
       </div>
     </div>
   </div>
-</div>

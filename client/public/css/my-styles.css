@@ -117,6 +117,15 @@ body {
   overflow: hidden;
 }
 
+.scrollable-list {
+  max-height: 300px;
+  /* یا هر ارتفاعی که تقریباً ۸ آیتم را جا دهد */
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  /* برای زیبایی در فایرفاکس */
+}
+
 .list-group-item::before {
   content: '';
   position: absolute;
@@ -135,7 +144,7 @@ body {
 .list-group-item:hover {
   background: linear-gradient(135deg, #667eea, #764ba2);
   color: white;
-  transform: translateX(10px);
+  /* transform: translateX(10px); */
 }
 
 .list-group-item.active {

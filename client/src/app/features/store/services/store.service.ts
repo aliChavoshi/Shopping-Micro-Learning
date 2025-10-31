@@ -4,7 +4,7 @@ import { APP_CONFIG } from '../../../core/config/appConfig.token';
 import { ToastMessageService } from '../../../core/services/toastMessage.Service';
 import { IPaginate } from '../../../shared/models/pagination';
 import { IBrand, ICatalog, IType } from '../../../shared/models/products';
-import { Observable, tap } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -26,11 +26,17 @@ export class StoreService {
   }
   getAllTypes() {
     return this.http.get<IType[]>(`${this.config.baseUrl}/catalog/getAllTypes`)
-      .pipe(tap(data => this.types.set(data)));
+      .pipe(
+        map((x) => [{ id: '', name: 'All' }, ...x]),
+        tap(data => this.types.set(data))
+      );
   }
 
   getAllBrands() {
     return this.http.get<IBrand[]>(`${this.config.baseUrl}/catalog/getAllBrands`)
-      .pipe(tap(data => this.brands.set(data)));
+      .pipe(
+        map((x) => [{ id: '', name: 'All' }, ...x]),
+        tap(data => this.brands.set(data))
+      );
   }
 }
