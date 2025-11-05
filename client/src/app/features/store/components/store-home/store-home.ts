@@ -4,12 +4,11 @@ import { ProductItem } from "../product-item/product-item";
 import { PageChangedEvent, PaginationModule } from 'ngx-bootstrap/pagination';
 import { FilterTypes } from "../filter-types/filter-types";
 import { FilterBrands } from "../filter-brands/filter-brands";
-import { IType } from '../../models/products';
-import { ProductParams } from '../../models/productParams';
+import { SortProductsComponent } from "../sort-products/sort-products.component";
 
 @Component({
   selector: 'app-store-home',
-  imports: [ProductItem, PaginationModule, FilterTypes, FilterBrands],
+  imports: [ProductItem, PaginationModule, FilterTypes, FilterBrands, SortProductsComponent],
   templateUrl: './store-home.html',
   styleUrl: './store-home.css'
 })
