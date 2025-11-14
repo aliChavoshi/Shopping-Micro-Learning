@@ -1,6 +1,11 @@
 import { Routes } from '@angular/router';
+import { Home } from './features/home/home';
 
 export const routes: Routes = [
+  {
+    path: '',
+    component: Home
+  },
   {
     path: 'store',
     loadComponent: () => import('./features/store/components/store').then(x => x.Store),
@@ -12,9 +17,9 @@ export const routes: Routes = [
       {
         path: ':id',
         loadComponent: () => import('./features/store/components/product-detail/product-detail.component').then(x => x.ProductDetailComponent),
-        data : {
-          breadcrumb:{
-            alias : 'productDetail'
+        data: {
+          breadcrumb: {
+            alias: 'productDetail'
           }
         }
       }

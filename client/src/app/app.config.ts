@@ -7,6 +7,7 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { errorHandlingInterceptor } from './core/interceptors/error-handling-interceptor';
+import { loadingInterceptor } from './core/interceptors/loading-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,6 +17,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideToastr(), //Toast Message
     provideClientHydration(withEventReplay()),
-    provideHttpClient(withInterceptors([errorHandlingInterceptor]))
+    provideHttpClient(withInterceptors([errorHandlingInterceptor, loadingInterceptor]))
   ]
 };
