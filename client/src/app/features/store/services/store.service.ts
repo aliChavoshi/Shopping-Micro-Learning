@@ -4,7 +4,7 @@ import { APP_CONFIG } from '../../../core/config/appConfig.token';
 import { ToastMessageService } from '../../../core/services/toastMessage.Service';
 import { IPaginate } from '../../../shared/models/pagination';
 import { IBrand, ICatalog, IType } from '../models/products';
-import { map, Observable, tap } from 'rxjs';
+import { from, map, Observable, of, scheduled, tap } from 'rxjs';
 import { sign } from 'crypto';
 import { ProductParams } from '../models/productParams';
 
@@ -48,8 +48,13 @@ export class StoreService {
         tap(data => this.brands.set(data))
       );
   }
-  getProductById(id: number) {
-    //TODO
+  getProductById(id: string): Observable<ICatalog> {
+    const products = this.products();
+    if (products) {
+      const product = products.data.find(x => x.id === id);
+      if (product) return of(product);
+    }
+    return this.http.get<ICatalog>(`${this.config.baseUrl}/catalog/GetProductById/${id}`);
   }
   setParams(parameters: ProductParams) {
     this.params.set(parameters);

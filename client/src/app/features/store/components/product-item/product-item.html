@@ -1,6 +1,6 @@
 @let product = item();
 
-<div class="card h-100 shadow-sm border-0" style="border-radius: 15px; overflow: hidden;">
+<div class="card h-100 shadow-sm border-0" style="border-radius: 15px; overflow: hidden;" [routerLink]="[product.id]">
   <div>
     <img [src]="product.imageFile" class="img-thumbnail">
   </div>
