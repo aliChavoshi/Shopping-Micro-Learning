@@ -37,7 +37,8 @@
     "ngx-bootstrap": "^20.0.2",
     "ngx-toastr": "^19.1.0",
     "rxjs": "~7.8.0",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "xng-breadcrumb": "^14.1.0"
   },
   "devDependencies": {
     "@angular/build": "^20.3.2",

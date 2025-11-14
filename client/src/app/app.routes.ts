@@ -11,7 +11,12 @@ export const routes: Routes = [
       },
       {
         path: ':id',
-        loadComponent: () => import('./features/store/components/product-detail/product-detail.component').then(x => x.ProductDetailComponent)
+        loadComponent: () => import('./features/store/components/product-detail/product-detail.component').then(x => x.ProductDetailComponent),
+        data : {
+          breadcrumb:{
+            alias : 'productDetail'
+          }
+        }
       }
     ]
   },
