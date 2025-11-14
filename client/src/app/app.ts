@@ -1,16 +1,12 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { ToastMessageService } from './core/services/toastMessage.Service';
 import { Navbar } from "./shared/components/navbar/navbar";
-import { HttpClient } from '@angular/common/http';
-import { APP_CONFIG } from './core/config/appConfig.token';
-import { ICatalog } from './features/store/models/products';
-import { IPaginate } from './shared/models/pagination';
+import { FooterComponent } from "./shared/components/footer/footer.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, TooltipModule, Navbar],
+  imports: [RouterOutlet, TooltipModule, Navbar, FooterComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

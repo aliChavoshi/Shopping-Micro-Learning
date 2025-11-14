@@ -8,8 +8,16 @@ export const routes: Routes = [
       {
         path: '',
         loadComponent: () => import('./features/store/components/store-home/store-home').then(x => x.StoreHome)
+      },
+      {
+        path: ':id',
+        loadComponent: () => import('./features/store/components/product-detail/product-detail.component').then(x => x.ProductDetailComponent)
       }
     ]
+  },
+  {
+    path: 'contact-us',
+    loadComponent: () => import('./features/pages/contact-us/contact-us.component').then(x => x.ContactUsComponent)
   },
   {
     path: 'not-found',

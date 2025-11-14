@@ -48,6 +48,9 @@ export class StoreService {
         tap(data => this.brands.set(data))
       );
   }
+  getProductById(id: number) {
+    //TODO
+  }
   setParams(parameters: ProductParams) {
     this.params.set(parameters);
   }
