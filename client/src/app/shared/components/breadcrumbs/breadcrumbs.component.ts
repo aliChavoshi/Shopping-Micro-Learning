@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { BreadcrumbComponent } from 'xng-breadcrumb';
+import { Component, inject, OnInit } from '@angular/core';
+import { BreadcrumbComponent, BreadcrumbService } from 'xng-breadcrumb';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -8,8 +8,17 @@ import { BreadcrumbComponent } from 'xng-breadcrumb';
   imports: [BreadcrumbComponent]
 })
 export class BreadcrumbsComponent implements OnInit {
-
-  constructor() { }
+  private bcService = inject(BreadcrumbService);
+  showBc = false;
+  constructor() {
+    this.bcService.breadcrumbs$.subscribe(res => {
+      if (res.some(x => x.label === 'Home') && res.length === 1) {
+        this.showBc = false;
+        return;
+      }
+      this.showBc = true;
+    })
+  }
 
   ngOnInit() {
   }

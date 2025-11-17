@@ -4,7 +4,11 @@ import { Home } from './features/home/home';
 export const routes: Routes = [
   {
     path: '',
-    component: Home
+    component: Home,
+    data: {
+      breadcrumb: 'Home',
+      // breadcrumb: { skip: true }
+    }
   },
   {
     path: 'store',
