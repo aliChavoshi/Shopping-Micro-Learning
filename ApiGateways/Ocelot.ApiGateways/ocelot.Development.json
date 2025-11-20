@@ -145,12 +145,12 @@
       "UpstreamPathTemplate": "/Basket/GetBasketByUserName/{userName}",
       "UpstreamHttpMethod": [ "GET" ],
       //Authentication
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "BasketAuthScheme",
-        "AllowedScopes": [ "basketapi" ],
-        "Authority": "https://host.docker.internal:9009",
-        "RequireHttpsMetadata": false
-      },
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "BasketAuthScheme",
+      //  "AllowedScopes": [ "basketapi" ],
+      //  "Authority": "https://host.docker.internal:9009",
+      //  "RequireHttpsMetadata": false
+      //},
       //important
       "DelegatingHandlers": [ "CorrelationDelegateHandler" ]
     },
@@ -167,12 +167,12 @@
       "UpstreamPathTemplate": "/Basket/DeleteBasketByUserName/{userName}",
       "UpstreamHttpMethod": [ "DELETE" ],
       //Authentication
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "BasketAuthScheme",
-        "AllowedScopes": [ "basketapi" ],
-        "Authority": "https://host.docker.internal:9009",
-        "RequireHttpsMetadata": false
-      },
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "BasketAuthScheme",
+      //  "AllowedScopes": [ "basketapi" ],
+      //  "Authority": "https://host.docker.internal:9009",
+      //  "RequireHttpsMetadata": false
+      //},
       //important
       "DelegatingHandlers": [ "CorrelationDelegateHandler" ]
     },
@@ -189,12 +189,12 @@
       "UpstreamPathTemplate": "/Basket/CreateBasket",
       "UpstreamHttpMethod": [ "POST" ],
       //Authentication
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "BasketAuthScheme",
-        "AllowedScopes": [ "basketapi" ],
-        "Authority": "https://host.docker.internal:9009",
-        "RequireHttpsMetadata": false
-      },
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "BasketAuthScheme",
+      //  "AllowedScopes": [ "basketapi" ],
+      //  "Authority": "https://host.docker.internal:9009",
+      //  "RequireHttpsMetadata": false
+      //},
       "DelegatingHandlers": [ "CorrelationDelegateHandler" ]
     },
     // Checkout Basket
@@ -210,12 +210,12 @@
       "UpstreamPathTemplate": "/Basket/Checkout",
       "UpstreamHttpMethod": [ "POST" ],
       //Authentication
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "BasketAuthScheme",
-        "AllowedScopes": [ "basketapi" ],
-        "Authority": "https://host.docker.internal:9009",
-        "RequireHttpsMetadata": false
-      },
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "BasketAuthScheme",
+      //  "AllowedScopes": [ "basketapi" ],
+      //  "Authority": "https://host.docker.internal:9009",
+      //  "RequireHttpsMetadata": false
+      //},
       //important
       "DelegatingHandlers": [ "CorrelationDelegateHandler" ],
       "RateLimitOptions": {

@@ -14,7 +14,6 @@ export class BasketService {
   private http = inject(HttpClient);
   //
   basket = signal<IBasket | null>(null);
-  constructor() { }
 
   getBasket(userName: string): Observable<IBasket> {
     return this.http.get<IBasket>(`${this.config.baseUrl}/basket/getBasketByUserName/${userName}`)
@@ -44,9 +43,9 @@ export class BasketService {
     }
   }
   private createBasket(): Basket {
-    let loginUser = 'alice';
+    let loginUser = 'alice'; //TODO
     const basket = new Basket(loginUser);
-    localStorage.setItem('basket_userName', loginUser);
+    localStorage.setItem(this.config.basketUsername, loginUser);
     return basket;
   }
   private addOrUpdateItemBasket(items: IBasketItem[], newItem: IBasketItem, quantity: number) {
