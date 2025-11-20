@@ -45,16 +45,16 @@
           <i class="fas fa-shopping-cart"></i>
           <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
             style="font-size: small;">
-            3
+            {{getBasketCount() ?? 0}}
           </span>
         </a>
-        <button class="btn text-white fs-5">
+        <button class="btn text-white fs-5 btn-group">
           logout
-          <i class="fa-solid fa-right-from-bracket"></i>
+          <i class="fa-solid fa-right-from-bracket mx-2"></i>
         </button>
-        <button class="btn text-white fs-5">
+        <button class="btn text-white fs-5 btn-group">
           login
-          <i class="fa-solid fa-right-to-bracket"></i>
+          <i class="fa-solid fa-right-to-bracket mx-2"></i>
         </button>
         <!-- <a (click)="register()" class="text-white fs-5">
             Register
