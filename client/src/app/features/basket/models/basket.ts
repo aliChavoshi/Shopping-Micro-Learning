@@ -6,7 +6,7 @@ export interface IBasket {
 export interface IBasketItem {
   quantity: number;
   price: number;
-  productId: number;
+  productId: string;
   imageFile: string;
   productName: string
 }
