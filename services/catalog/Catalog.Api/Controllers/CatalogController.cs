@@ -16,12 +16,13 @@ public class CatalogController : ApiController
     private readonly ILogger<CatalogController> _logger;
     private readonly ICorrelationIdGenerator _correlationIdGenerator;
 
-    public CatalogController(IMediator mediator, ILogger<CatalogController> logger, ICorrelationIdGenerator correlationIdGenerator)
+    public CatalogController(IMediator mediator, ILogger<CatalogController> logger,
+        ICorrelationIdGenerator correlationIdGenerator)
     {
         _mediator = mediator;
         _logger = logger;
         _correlationIdGenerator = correlationIdGenerator;
-        _logger.LogInformation("CorrelationId {correlationId}" , correlationIdGenerator.Get());
+        _logger.LogInformation("CorrelationId {correlationId}", correlationIdGenerator.Get());
     }
 
     //IActionResult => no output

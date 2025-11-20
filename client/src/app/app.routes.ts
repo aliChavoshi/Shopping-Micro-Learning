@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { Home } from './features/home/home';
+import { Home } from './features/home/components/home';
 
 export const routes: Routes = [
   {
@@ -26,6 +26,16 @@ export const routes: Routes = [
             alias: 'productDetail'
           }
         }
+      }
+    ]
+  },
+  {
+    path: 'basket',
+    loadComponent: () => import('./features/basket/components/basket').then(x => x.Basket),
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./features/basket/components/basket-home/basket-home').then(x => x.BasketHome),
       }
     ]
   },
