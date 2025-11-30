@@ -1,63 +1,71 @@
 <!-- Cart Summary Section -->
-<div class="cart-summary-section">
-  <h3 class="section-title">
-    <i class="fas fa-calculator me-2"></i>
-    خلاصه سفارش
-  </h3>
+ @if(basket.basketTotalSource()){
+   @let summary = basket.basketTotalSource();
+   <div class="cart-summary-section">
+     <h3 class="section-title">
+       <i class="fas fa-calculator me-2"></i>
+       خلاصه سفارش
+     </h3>
 
-  <div class="cart-summary">
-    <div class="summary-row">
-      <span>جمع کالاها (<span id="totalItems">10</span> کالا):</span>
-      <span id="subtotal">100000</span>
-    </div>
-    <div class="summary-row">
-      <span>هزینه ارسال:</span>
-      <span id="shipping">0</span>
-    </div>
-    <div class="summary-row">
-      <span>تخفیف:</span>
-      <span id="discount" class="text-success">0</span>
-    </div>
-    <div class="summary-row">
-      <span>مالیات (9%):</span>
-      <span id="tax">10000</span>
-    </div>
-    <div class="summary-row total-row text-nowrap fs-6">
-      <span>مبلغ قابل پرداخت:</span>
-      <span id="total">10.0000</span>
-    </div>
-  </div>
+     <div class="cart-summary">
+       <div class="summary-row">
+         <span>جمع کالاها (<span id="totalItems">10</span> کالا):</span>
+         <span id="subtotal">{{summary?.totalItems | number}}</span>
+       </div>
+       @if(summary?.shippingTotal ?? 0 > 0){
+       <div class="summary-row">
+         <span>هزینه ارسال:</span>
+         <span id="shipping">{{summary?.shippingTotal ?? 0}}</span>
+       </div>
+       }
+       @if(summary?.discount ?? 0 > 0){
+       <div class="summary-row">
+         <span>تخفیف:</span>
+         <span id="discount" class="text-success">{{summary?.discount}}</span>
+       </div>
+       }@if(summary?.tax ??0 > 0){
+       <div class="summary-row">
+         <span>مالیات (9%):</span>
+         <span id="tax">{{summary?.tax | number}}</span>
+       </div>
+       }
+       <div class="summary-row total-row text-nowrap fs-6">
+         <span>مبلغ قابل پرداخت:</span>
+         <span id="total">{{summary?.totalToPay}}</span>
+       </div>
+     </div>
 
-  <!-- Shipping Info -->
-  <div class="shipping-info">
-    <i class="fas fa-truck text-success me-2"></i>
-    <strong>ارسال رایگان</strong> برای خرید بالای 50 میلیون تومان
-  </div>
+     <!-- Shipping Info -->
+     <div class="shipping-info">
+       <i class="fas fa-truck text-success me-2"></i>
+       <strong>ارسال رایگان</strong> برای خرید بالای 50 میلیون تومان
+     </div>
 
-  <!-- Promo Code -->
-  <div class="promo-section">
-    <label class="fw-semibold mb-2">کد تخفیف:</label>
-    <div class="input-group">
-      <input type="text" class="form-control promo-input" id="promoCode" placeholder="کد تخفیف را وارد کنید">
-      <button class="promo-btn" onclick="applyPromoCode()">
-        اعمال
-      </button>
-    </div>
-  </div>
+     <!-- Promo Code -->
+     <div class="promo-section">
+       <label class="fw-semibold mb-2">کد تخفیف:</label>
+       <div class="input-group">
+         <input type="text" class="form-control promo-input" id="promoCode" placeholder="کد تخفیف را وارد کنید">
+         <button class="promo-btn" onclick="applyPromoCode()">
+           اعمال
+         </button>
+       </div>
+     </div>
 
-  <!-- Checkout Button -->
-  <button class="checkout-btn" onclick="proceedToCheckout()">
-    <i class="fas fa-credit-card me-2"></i>
-    تکمیل خرید
-  </button>
+     <!-- Checkout Button -->
+     <button class="checkout-btn" onclick="proceedToCheckout()">
+       <i class="fas fa-credit-card me-2"></i>
+       تکمیل خرید
+     </button>
 
-  <!-- Payment Methods -->
-  <div class="text-center mt-3">
-    <small class="text-muted">روش‌های پرداخت امن:</small>
-    <div class="mt-2">
-      <i class="fab fa-cc-visa fa-2x text-primary me-2"></i>
-      <i class="fab fa-cc-mastercard fa-2x text-warning me-2"></i>
-      <i class="fas fa-university fa-2x text-success"></i>
-    </div>
-  </div>
-</div>
+     <!-- Payment Methods -->
+     <div class="text-center mt-3">
+       <small class="text-muted">روش‌های پرداخت امن:</small>
+       <div class="mt-2">
+         <i class="fab fa-cc-visa fa-2x text-primary me-2"></i>
+         <i class="fab fa-cc-mastercard fa-2x text-warning me-2"></i>
+         <i class="fas fa-university fa-2x text-success"></i>
+       </div>
+     </div>
+   </div>
+ }

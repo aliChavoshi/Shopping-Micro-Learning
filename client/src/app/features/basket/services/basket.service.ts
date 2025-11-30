@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, signal } from '@angular/core';
+import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { APP_CONFIG } from '../../../core/config/appConfig.token';
 import { Basket, IBasket, IBasketItem } from '../models/basket';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { ICatalog } from '../../store/models/products';
 import { IBasketTotal } from '../models/basketTotal';
 
@@ -14,28 +14,48 @@ export class BasketService {
   private http = inject(HttpClient);
   //Signal
   basket = signal<IBasket | null>(null);
-  //Observable
-  private basketTotalSource = new BehaviorSubject<IBasketTotal | null>(null);
-  basketTotal$ = this.basketTotalSource.asObservable();
+  // basketTotalSource = signal<IBasketTotal | null>(null);
+  basketTotalSource = computed<IBasketTotal | null>(() => {
+    const basket = this.basket(); //signal
+    if (!basket) return null;
+
+    const totalItems = basket.items.reduce((prev, item) => prev + item.price * item.quantity, 0);
+    const discount = 0;
+    const shippingTotal = 0;
+    const tax = totalItems * 0.09;
+
+    const totalToPay = (totalItems + shippingTotal + tax) - discount;
+    return {
+      discount,
+      shippingTotal,
+      tax,
+      totalItems,
+      totalToPay
+    }
+  });
   //
+  constructor() {
+    // effect(() => {
+    //   const b = this.basket();
+    //   if (b) {
+    //     this.calculateBasketTotal();
+    //   }
+    // });
+  }
   getBasket(userName: string): Observable<IBasket> {
     return this.http.get<IBasket>(`${this.config.baseUrl}/basket/getBasketByUserName/${userName}`)
       .pipe(
-        tap((response) => {
-          this.basket.set(response),
-          //TODO
-            this.calculateBasketTotal()
-        }),
+        tap((response) =>
+          this.basket.set(response)
+        ),
       );
   }
   setBasket(basket: IBasket) {
     return this.http.post<IBasket>(`${this.config.baseUrl}/basket/createBasket`, basket)
       .pipe(
-        tap((response) => {
-          this.basket.set(response),
-          //TODO
-            this.calculateBasketTotal()
-        }),
+        tap((response) =>
+          this.basket.set(response)
+        ),
       )
   }
   addItemToBasket(product: ICatalog, quantity: number = 1) {
@@ -69,22 +89,22 @@ export class BasketService {
     }
     return items;
   }
-  private calculateBasketTotal() {
-    const basket = this.basket();
-    if (!basket) return;
+  // private calculateBasketTotal() {
+  //   const basket = this.basket(); //signal
+  //   if (!basket) return;
 
-    const totalItems = basket.items.reduce((prev, item) => prev + item.price * item.quantity, 0);
-    const discount = 0;
-    const shippingTotal = 0;
-    const tax = totalItems * 0.09;
+  //   const totalItems = basket.items.reduce((prev, item) => prev + item.price * item.quantity, 0);
+  //   const discount = 0;
+  //   const shippingTotal = 0;
+  //   const tax = totalItems * 0.09;
 
-    const totalToPay = (totalItems + shippingTotal + tax) - discount;
-    this.basketTotalSource.next({
-      discount,
-      shippingTotal,
-      tax,
-      totalItems,
-      totalToPay
-    })
-  }
+  //   const totalToPay = (totalItems + shippingTotal + tax) - discount;
+  //   this.basketTotalSource.set({
+  //     discount,
+  //     shippingTotal,
+  //     tax,
+  //     totalItems,
+  //     totalToPay
+  //   })
+  // }
 }
