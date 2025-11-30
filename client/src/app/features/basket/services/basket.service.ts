@@ -1,10 +1,10 @@
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { APP_CONFIG } from '../../../core/config/appConfig.token';
 import { Basket, IBasket, IBasketItem } from '../models/basket';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { ICatalog } from '../../store/models/products';
+import { IBasketTotal } from '../models/basketTotal';
 
 @Injectable({
   providedIn: 'root'
@@ -12,19 +12,30 @@ import { ICatalog } from '../../store/models/products';
 export class BasketService {
   private config = inject(APP_CONFIG); //injection in the angular
   private http = inject(HttpClient);
-  //
+  //Signal
   basket = signal<IBasket | null>(null);
-
+  //Observable
+  private basketTotalSource = new BehaviorSubject<IBasketTotal | null>(null);
+  basketTotal$ = this.basketTotalSource.asObservable();
+  //
   getBasket(userName: string): Observable<IBasket> {
     return this.http.get<IBasket>(`${this.config.baseUrl}/basket/getBasketByUserName/${userName}`)
       .pipe(
-        tap((response) => this.basket.set(response))
+        tap((response) => {
+          this.basket.set(response),
+          //TODO
+            this.calculateBasketTotal()
+        }),
       );
   }
   setBasket(basket: IBasket) {
     return this.http.post<IBasket>(`${this.config.baseUrl}/basket/createBasket`, basket)
       .pipe(
-        tap((response) => this.basket.set(response))
+        tap((response) => {
+          this.basket.set(response),
+          //TODO
+            this.calculateBasketTotal()
+        }),
       )
   }
   addItemToBasket(product: ICatalog, quantity: number = 1) {
@@ -57,5 +68,23 @@ export class BasketService {
       items.push(newItem);
     }
     return items;
+  }
+  private calculateBasketTotal() {
+    const basket = this.basket();
+    if (!basket) return;
+
+    const totalItems = basket.items.reduce((prev, item) => prev + item.price * item.quantity, 0);
+    const discount = 0;
+    const shippingTotal = 0;
+    const tax = totalItems * 0.09;
+
+    const totalToPay = (totalItems + shippingTotal + tax) - discount;
+    this.basketTotalSource.next({
+      discount,
+      shippingTotal,
+      tax,
+      totalItems,
+      totalToPay
+    })
   }
 }
