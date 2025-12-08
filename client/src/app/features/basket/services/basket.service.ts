@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { APP_CONFIG } from '../../../core/config/appConfig.token';
 import { Basket, IBasket, IBasketItem } from '../models/basket';
-import { Observable, tap } from 'rxjs';
+import { EMPTY, Observable, tap } from 'rxjs';
 import { ICatalog } from '../../store/models/products';
 import { IBasketTotal } from '../models/basketTotal';
 
@@ -64,6 +64,25 @@ export class BasketService {
     basket.items = this.addOrUpdateItemBasket(basket.items, itemToAdd, quantity);
     return this.setBasket(basket);
   }
+  increaseItemQuantity(item: IBasketItem): Observable<IBasket> {
+    const basket = this.basket();
+    if (!basket) return EMPTY;
+    const index = basket.items.findIndex(x => x.productId === item.productId);
+    if (index > 0) {
+      basket.items[index].quantity++;
+      return this.setBasket(basket);
+    } else {
+      const product = this.mapItemBasketToProduct(item);
+      return this.addItemToBasket(product, 1);
+    }
+  }
+  decreaseItemQuantity(item: IBasketItem) {
+    //Basket
+    //Any
+    //Index
+    //OK => quantity --
+    // Not OK => Delete
+  }
   private mapProductToItemBasket(product: ICatalog): IBasketItem {
     return {
       imageFile: product.imageFile,
@@ -88,6 +107,24 @@ export class BasketService {
       items.push(newItem);
     }
     return items;
+  }
+  private mapItemBasketToProduct(item: IBasketItem): ICatalog {
+    return {
+      brands: {
+        id: '',
+        name: ''
+      },
+      description: '',
+      id: item.productId,
+      imageFile: item.imageFile,
+      name: item.productName,
+      price: item.price,
+      summary: '',
+      types: {
+        id: '',
+        name: ''
+      }
+    }
   }
   // private calculateBasketTotal() {
   //   const basket = this.basket(); //signal
