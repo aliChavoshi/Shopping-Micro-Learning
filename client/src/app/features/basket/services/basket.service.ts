@@ -33,7 +33,6 @@ export class BasketService {
       totalToPay
     }
   });
-  //
   constructor() {
     // effect(() => {
     //   const b = this.basket();
@@ -77,12 +76,48 @@ export class BasketService {
     }
   }
   decreaseItemQuantity(item: IBasketItem) {
-    //Basket
-    //Any
-    //Index
-    //OK => quantity --
-    // Not OK => Delete
+    const basket = this.basket();
+    if (!basket) return EMPTY;
+    const index = basket.items.findIndex(x => x.productId === item.productId);
+    if (index >= 0) {
+      const product = basket.items[index];
+      if (product.quantity >= 2) {
+        product.quantity--;
+        return this.setBasket(basket);
+      } else {
+        //remove Item from basket
+        return this.removeItemFromBasket(product.productId);
+      }
+    }
+    return EMPTY;
   }
+  deleteBasket(userName: string) {
+    return this.http.delete<boolean>(`${this.config.baseUrl}/basket/deleteBasketByUserName/${userName}`)
+      .pipe(
+        tap((response) => {
+          if (response) {
+            this.basket.set(null);
+            localStorage.removeItem(this.config.basketUsername);
+          }
+        })
+      )
+  }
+  removeItemFromBasket(productId: string) {
+    const basket = this.basket();
+    if (!basket) return EMPTY;
+    if (basket.items.some(x => x.productId === productId)) {
+      basket.items = basket.items.filter(x => x.productId !== productId); //update
+      if (basket.items.length > 0) {
+        //we have products in our basket
+        return this.setBasket(basket);
+      } else {
+        //basket is EMPTY
+        return this.deleteBasket(basket.userName);
+      }
+    }
+    return EMPTY;
+  }
+  //#region privateMethods
   private mapProductToItemBasket(product: ICatalog): IBasketItem {
     return {
       imageFile: product.imageFile,
@@ -144,4 +179,5 @@ export class BasketService {
   //     totalToPay
   //   })
   // }
+  //#endregion
 }
