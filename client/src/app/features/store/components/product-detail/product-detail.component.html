@@ -1,4 +1,4 @@
-@if(catalog | async;as product){
+@if(product | async;as product){
 <div class="main-container">
   <!-- Header Section -->
   <div class="header-section p-5">
@@ -97,6 +97,7 @@
             </ul>
           </div>
 
+          @if(isInBasket()){
           <div class="quantity-section">
             <label class="fw-bold me-3">Quantity:</label>
             <div class="quantity-controls">
@@ -109,14 +110,16 @@
               </button>
             </div>
           </div>
+          }@else{
           <div class="action-buttons">
-            <button class="btn btn-primary-custom">
+            <button class="btn btn-primary-custom" (click)="addToBasket()">
               <i class="fas fa-shopping-cart me-2"></i>Add to Cart
             </button>
             <button class="btn btn-outline-custom">
               <i class="fas fa-bolt me-2"></i>Buy Now
             </button>
           </div>
+          }
         </div>
       </div>
     </div>
