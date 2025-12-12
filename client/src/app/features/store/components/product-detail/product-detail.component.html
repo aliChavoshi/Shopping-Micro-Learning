@@ -101,15 +101,16 @@
           <div class="quantity-section">
             <label class="fw-bold me-3">Quantity:</label>
             <div class="quantity-controls">
-              <button class="quantity-btn">
+              <button class="quantity-btn" (click)="decreaseItemQuantity()">
                 <i class="fas fa-minus"></i>
               </button>
               <input type="number" [value]="basketItem()?.quantity" class="quantity-input" id="quantity">
-              <button class="quantity-btn">
+              <button class="quantity-btn" (click)="increaseItemQuantity()">
                 <i class="fas fa-plus"></i>
               </button>
             </div>
           </div>
+
           }@else{
           <div class="action-buttons">
             <button class="btn btn-primary-custom" (click)="addToBasket()">

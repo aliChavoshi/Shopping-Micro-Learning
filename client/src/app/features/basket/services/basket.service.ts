@@ -75,7 +75,7 @@ export class BasketService {
       return this.addItemToBasket(product, 1);
     }
   }
-  decreaseItemQuantity(item: IBasketItem) {
+  decreaseItemQuantity(item: IBasketItem): Observable<IBasket | boolean> {
     const basket = this.basket();
     if (!basket) return EMPTY;
     const index = basket.items.findIndex(x => x.productId === item.productId);
