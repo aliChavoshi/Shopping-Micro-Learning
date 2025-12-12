@@ -102,7 +102,7 @@ export class BasketService {
         })
       )
   }
-  removeItemFromBasket(productId: string) {
+  removeItemFromBasket(productId: string): Observable<any> {
     const basket = this.basket();
     if (!basket) return EMPTY;
     if (basket.items.some(x => x.productId === productId)) {

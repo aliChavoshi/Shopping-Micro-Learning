@@ -1,5 +1,5 @@
-@if(basket.basket()){
-@let products = basket.basket();
+@if(basketService.basket()){
+@let products = basketService.basket();
 <div class="main-container">
   <!-- Header Section -->
   <div class="header-section">
@@ -19,11 +19,16 @@
   <div class="cart-content">
     <!-- Cart Items Section -->
     <div class="cart-items-section">
-      <h3 class="section-title">
-        <i class="fas fa-list me-2"></i>
-        محصولات سبد خرید (<span id="itemCount">{{products?.items?.length ?? 0}}</span> کالا)
-      </h3>
-
+      <div class="d-flex justify-content-between align-items-center align-content-center">
+        <h3 class="section-title">
+          <i class="fas fa-list me-2"></i>
+          محصولات سبد خرید (<span id="itemCount">{{products?.items?.length ?? 0}}</span> کالا)
+        </h3>
+        <button class="remove-btn text-nowrap mb-3" (click)="deleteBasket()">
+          <i class="fas fa-trash me-1"></i>
+          حذف کل سبد خرید
+        </button>
+      </div>
       <div id="cartItems">
         <!-- Cart Item 1 -->
         @for (item of products?.items; track $index) {
@@ -39,17 +44,17 @@
               <div class="quantity-section">
                 <label class="fw-semibold me-2">تعداد:</label>
                 <div class="quantity-controls">
-                  <button class="quantity-btn minus-btn">
+                  <button class="quantity-btn minus-btn" (click)="decreaseItemQuantity(item)">
                     <i class="fas fa-minus"></i>
                   </button>
                   <input type="number" class="quantity-input" [value]="item.quantity" min="1" max="10" readonly
                     data-price="45000000">
-                  <button class="quantity-btn plus-btn">
+                  <button class="quantity-btn plus-btn" (click)="increaseItemQuantity(item)">
                     <i class="fas fa-plus"></i>
                   </button>
                 </div>
               </div>
-              <button class="remove-btn" onclick="removeItem(1)">
+              <button class="remove-btn" (click)="removeItemFromBasket(item.productId)">
                 <i class="fas fa-trash me-1"></i>
                 حذف
               </button>
@@ -57,15 +62,6 @@
           </div>
         </div>
         }
-      </div>
-
-      <!-- TODO -->
-      <!-- Empty Cart Message (Hidden by default) -->
-      <div class="empty-cart d-none" id="emptyCart">
-        <i class="fas fa-shopping-cart"></i>
-        <h3>سبد خرید شما خالی است</h3>
-        <p>هنوز محصولی به سبد خرید خود اضافه نکرده‌اید</p>
-        <a href="#" class="continue-shopping">ادامه خرید</a>
       </div>
 
       <div class="text-center mt-4">
@@ -77,6 +73,20 @@
     </div>
 
     <app-basket-total></app-basket-total>
+  </div>
+</div>
+}
+@else{
+<!-- Empty Cart Message (Hidden by default) -->
+<div class="main-container">
+  <!-- Cart Items Section -->
+  <div class="cart-items-section">
+    <div class="empty-cart text-dark" id="emptyCart">
+      <i class="fas fa-shopping-cart"></i>
+      <h3>سبد خرید شما خالی است</h3>
+      <p>هنوز محصولی به سبد خرید خود اضافه نکرده‌اید</p>
+      <a href="#" class="continue-shopping text-dark">ادامه خرید</a>
+    </div>
   </div>
 </div>
 }
