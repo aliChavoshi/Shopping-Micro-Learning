@@ -1,4 +1,4 @@
-@if(product | async;as product){
+@if(product();as product){
 <div class="main-container">
   <!-- Header Section -->
   <div class="header-section p-5">
@@ -104,7 +104,7 @@
               <button class="quantity-btn">
                 <i class="fas fa-minus"></i>
               </button>
-              <input type="number" min="1" max="10" class="quantity-input" id="quantity">
+              <input type="number" [value]="basketItem()?.quantity" class="quantity-input" id="quantity">
               <button class="quantity-btn">
                 <i class="fas fa-plus"></i>
               </button>
